@@ -1,0 +1,23 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/TokenVampire.Application/TokenVampire.Application.csproj" />
+    <Project Path="src/TokenVampire.Assurance/TokenVampire.Assurance.csproj" />
+    <Project Path="src/TokenVampire.Billing/TokenVampire.Billing.csproj" />
+    <Project Path="src/TokenVampire.Cli/TokenVampire.Cli.csproj" />
+    <Project Path="src/TokenVampire.Compliance/TokenVampire.Compliance.csproj" />
+    <Project Path="src/TokenVampire.Desktop/TokenVampire.Desktop.csproj" />
+    <Project Path="src/TokenVampire.Domain/TokenVampire.Domain.csproj" />
+    <Project Path="src/TokenVampire.Evidence/TokenVampire.Evidence.csproj" />
+    <Project Path="src/TokenVampire.I18n/TokenVampire.I18n.csproj" />
+    <Project Path="src/TokenVampire.Infrastructure/TokenVampire.Infrastructure.csproj" />
+    <Project Path="src/TokenVampire.Jurisdictions/TokenVampire.Jurisdictions.csproj" />
+    <Project Path="src/TokenVampire.Plugin.Abstractions/TokenVampire.Plugin.Abstractions.csproj" />
+    <Project Path="src/TokenVampire.Presentation/TokenVampire.Presentation.csproj" />
+    <Project Path="src/TokenVampire.Remedies/TokenVampire.Remedies.csproj" />
+    <Project Path="src/TokenVampire.Reporting/TokenVampire.Reporting.csproj" />
+    <Project Path="src/TokenVampire.Server/TokenVampire.Server.csproj" />
+  </Folder>
+  <Folder Name="/workers/">
+    <Project Path="workers/TokenVampire.ParserWorker/TokenVampire.ParserWorker.csproj" />
+  </Folder>
+</Solution>

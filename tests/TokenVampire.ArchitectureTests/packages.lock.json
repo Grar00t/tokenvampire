@@ -175,7 +175,8 @@
         "dependencies": {
           "TokenVampire.Application": "[1.0.0, )",
           "TokenVampire.Infrastructure": "[1.0.0, )",
-          "TokenVampire.Presentation": "[1.0.0, )"
+          "TokenVampire.Presentation": "[1.0.0, )",
+          "TokenVampire.Reporting": "[1.0.0, )"
         }
       },
       "tokenvampire.desktop": {
@@ -214,6 +215,14 @@
         "type": "Project",
         "dependencies": {
           "TokenVampire.Application": "[1.0.0, )",
+          "TokenVampire.I18n": "[1.0.0, )"
+        }
+      },
+      "tokenvampire.reporting": {
+        "type": "Project",
+        "dependencies": {
+          "TokenVampire.Application": "[1.0.0, )",
+          "TokenVampire.Domain": "[1.0.0, )",
           "TokenVampire.I18n": "[1.0.0, )"
         }
       },

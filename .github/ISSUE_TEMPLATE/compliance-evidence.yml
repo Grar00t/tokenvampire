@@ -1,0 +1,29 @@
+name: Compliance evidence
+description: Map a versioned control to evidence without claiming certification
+title: "[Compliance] "
+labels: []
+body:
+  - type: input
+    id: framework
+    attributes:
+      label: Framework, version, and control ID
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Official source and scope
+    validations:
+      required: true
+  - type: textarea
+    id: required
+    attributes:
+      label: Required evidence and reviewer criteria
+    validations:
+      required: true
+  - type: textarea
+    id: limitations
+    attributes:
+      label: Limitations, exceptions, expiry, and non-certification wording
+    validations:
+      required: true

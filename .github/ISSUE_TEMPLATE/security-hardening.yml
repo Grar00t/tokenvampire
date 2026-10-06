@@ -1,0 +1,26 @@
+name: Security hardening
+description: Track non-confidential security work; report vulnerabilities privately
+title: "[Security] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: Do not disclose an exploitable vulnerability here. Follow SECURITY.md.
+  - type: textarea
+    id: control
+    attributes:
+      label: Control objective or threat
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Existing evidence and gap
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Verifiable acceptance criteria
+    validations:
+      required: true

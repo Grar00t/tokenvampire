@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+ <PropertyGroup><OutputType>Exe</OutputType><IsPackable>false</IsPackable></PropertyGroup>
+ <ItemGroup>
+  <PackageReference Include="xunit.v3" />
+ </ItemGroup>
+ <ItemGroup><ProjectReference Include="../../src/TokenVampire.Domain/TokenVampire.Domain.csproj" /><ProjectReference Include="../../src/TokenVampire.Desktop/TokenVampire.Desktop.csproj" /><ProjectReference Include="../../src/TokenVampire.Cli/TokenVampire.Cli.csproj" /><ProjectReference Include="../../src/TokenVampire.Presentation/TokenVampire.Presentation.csproj" /></ItemGroup>
+</Project>

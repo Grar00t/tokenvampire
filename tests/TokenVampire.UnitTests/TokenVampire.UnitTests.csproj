@@ -3,5 +3,5 @@
  <ItemGroup>
   <PackageReference Include="xunit.v3" />
  </ItemGroup>
- <ItemGroup><ProjectReference Include="../../src/TokenVampire.Domain/TokenVampire.Domain.csproj" /><ProjectReference Include="../../src/TokenVampire.Infrastructure/TokenVampire.Infrastructure.csproj" /><ProjectReference Include="../../src/TokenVampire.Billing/TokenVampire.Billing.csproj" /><ProjectReference Include="../../src/TokenVampire.Evidence/TokenVampire.Evidence.csproj" /><ProjectReference Include="..\..\src\TokenVampire.Reporting\TokenVampire.Reporting.csproj" /></ItemGroup>
+ <ItemGroup><ProjectReference Include="../../src/TokenVampire.Domain/TokenVampire.Domain.csproj" /><ProjectReference Include="../../src/TokenVampire.Infrastructure/TokenVampire.Infrastructure.csproj" /><ProjectReference Include="../../src/TokenVampire.Billing/TokenVampire.Billing.csproj" /><ProjectReference Include="../../src/TokenVampire.Evidence/TokenVampire.Evidence.csproj" /><ProjectReference Include="..\..\src\TokenVampire.Reporting\TokenVampire.Reporting.csproj" /><ProjectReference Include="..\..\src\TokenVampire.I18n\TokenVampire.I18n.csproj" /></ItemGroup>
 </Project>

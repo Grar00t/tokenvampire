@@ -24,3 +24,4 @@ secrets.json
 *.p12
 *.key
 *.pem
+ledger.local.json

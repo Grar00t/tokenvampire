@@ -1,1 +1,1 @@
-namespace TokenVampire.Jurisdictions;public static class AssemblyMarker { }
+namespace TokenVampire.Jurisdictions; public static class AssemblyMarker { }

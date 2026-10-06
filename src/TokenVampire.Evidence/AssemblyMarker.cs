@@ -1,1 +1,1 @@
-namespace TokenVampire.Evidence;public static class AssemblyMarker { }
+namespace TokenVampire.Evidence; public static class AssemblyMarker { }

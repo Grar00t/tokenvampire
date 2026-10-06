@@ -16,7 +16,8 @@ public class IngestTests
         return new Env(new Ingestor(v, s, max), v, s, dir);
     }
 
-    [Fact] public async Task Arabic_file_name_roundtrip()
+    [Fact]
+    public async Task Arabic_file_name_roundtrip()
     {
         var e = Make();
         var f = Path.Combine(e.Dir, "تقرير_الفاتورة.txt");
@@ -28,7 +29,8 @@ public class IngestTests
         Assert.Single(e.Store.All());
     }
 
-    [Fact] public void Name_is_normalized_to_nfc() =>
+    [Fact]
+    public void Name_is_normalized_to_nfc() =>
         Assert.Equal("\u00e9.txt", FileNamePolicy.Normalize("e\u0301.txt"));
 
     [Theory]
@@ -43,7 +45,8 @@ public class IngestTests
     public void Hostile_names_rejected(string name) =>
         Assert.Throws<IngestException>(() => FileNamePolicy.Normalize(name));
 
-    [Fact] public async Task Oversize_rejected()
+    [Fact]
+    public async Task Oversize_rejected()
     {
         var e = Make(10);
         var f = Path.Combine(e.Dir, "big.bin");
@@ -52,14 +55,16 @@ public class IngestTests
         Assert.Empty(e.Store.All());
     }
 
-    [Fact] public async Task Missing_file_rejected()
+    [Fact]
+    public async Task Missing_file_rejected()
     {
         var e = Make();
         await Assert.ThrowsAsync<IngestException>(() =>
             e.Ing.IngestAsync(Path.Combine(e.Dir, "nope.txt"), TestContext.Current.CancellationToken));
     }
 
-    [Fact] public async Task Duplicate_content_stored_once()
+    [Fact]
+    public async Task Duplicate_content_stored_once()
     {
         var e = Make();
         var a = Path.Combine(e.Dir, "a.txt");
@@ -72,7 +77,8 @@ public class IngestTests
         Assert.Single(e.Store.All());
     }
 
-    [Fact] public async Task Symlink_rejected()
+    [Fact]
+    public async Task Symlink_rejected()
     {
         var e = Make();
         var target = Path.Combine(e.Dir, "t.txt");
@@ -83,7 +89,8 @@ public class IngestTests
         await Assert.ThrowsAsync<IngestException>(() => e.Ing.IngestAsync(link, TestContext.Current.CancellationToken));
     }
 
-    [Fact] public void Salt_is_persisted()
+    [Fact]
+    public void Salt_is_persisted()
     {
         var dir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString("N"));
         var s1 = KeyMaterial.LoadOrCreateSalt(dir);

@@ -71,6 +71,7 @@ public sealed class Catalog
         c.Set("ar", "report.seats", "تراخيص المقاعد");
         c.Set("ar", "report.refunds", "المستردات");
         c.Set("ar", "report.credits", "الأرصدة الممنوحة");
+        BuiltinLocales.AddAll(c);
         return c;
     }
 }

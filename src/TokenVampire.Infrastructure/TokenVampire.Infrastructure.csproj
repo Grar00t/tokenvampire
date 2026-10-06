@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+ <PropertyGroup></PropertyGroup>
+ <ItemGroup>
+  <ProjectReference Include="../../src/TokenVampire.Domain/TokenVampire.Domain.csproj" />
+  <ProjectReference Include="../../src/TokenVampire.Application/TokenVampire.Application.csproj" />
+ </ItemGroup>
+ <ItemGroup>
+  <PackageReference Include="Microsoft.Data.Sqlite" />
+  <ProjectReference Include="../../src/TokenVampire.Evidence/TokenVampire.Evidence.csproj" />
+ </ItemGroup>
+</Project>

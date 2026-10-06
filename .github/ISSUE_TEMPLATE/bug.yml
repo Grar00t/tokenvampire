@@ -1,0 +1,33 @@
+name: Bug report
+description: Report reproducible incorrect behavior without private evidence
+title: "[Bug] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: Do not attach credentials, private messages, card data, raw evidence, or decrypted vault content.
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction
+      description: Use synthetic data and exact commands.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Commit or version
+    validations:
+      required: true

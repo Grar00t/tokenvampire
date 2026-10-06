@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+ <PropertyGroup><OutputType>Exe</OutputType></PropertyGroup>
+ <ItemGroup>
+  <ProjectReference Include="../../src/TokenVampire.Application/TokenVampire.Application.csproj" />
+  <ProjectReference Include="../../src/TokenVampire.Infrastructure/TokenVampire.Infrastructure.csproj" />
+  <ProjectReference Include="../../src/TokenVampire.Presentation/TokenVampire.Presentation.csproj" />
+  <ProjectReference Include="..\TokenVampire.Reporting\TokenVampire.Reporting.csproj" />
+ </ItemGroup>
+</Project>

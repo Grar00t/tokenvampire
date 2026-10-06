@@ -1,0 +1,29 @@
+name: Jurisdiction pack
+description: Add or revise a dated informational jurisdiction pack
+title: "[Jurisdiction] "
+labels: []
+body:
+  - type: input
+    id: region
+    attributes:
+      label: Region and pack ID
+    validations:
+      required: true
+  - type: textarea
+    id: official
+    attributes:
+      label: Official sources, publishers, effective dates, and retrieval dates
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope, eligibility questions, limitations, and stale date
+    validations:
+      required: true
+  - type: textarea
+    id: translations
+    attributes:
+      label: Supported languages and human review status
+    validations:
+      required: true

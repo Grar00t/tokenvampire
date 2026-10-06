@@ -1,0 +1,37 @@
+name: Localization
+description: Add or correct locale, RTL, Unicode, or translated resources
+title: "[i18n] "
+labels: []
+body:
+  - type: input
+    id: locale
+    attributes:
+      label: BCP 47 locale
+      placeholder: ar-SA
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - Translation
+        - RTL or bidi
+        - Number, currency, date, or plural
+        - Unicode security
+        - Font or rendering
+        - Accessibility
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Reproduction and expected result
+    validations:
+      required: true
+  - type: textarea
+    id: review
+    attributes:
+      label: Human review and source information
+    validations:
+      required: true

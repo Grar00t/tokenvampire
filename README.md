@@ -1,143 +1,123 @@
 # TokenVampire
 
-> **AI can sound intelligent and still fail the job. TokenVampire measures what actually happened.**
+<p align="center">
+  <strong>Evidence before inference. One audit standard for every AI vendor.</strong>
+</p>
+
+<p align="center">
+  <img src="research/anthropic/2026-10-06/TokenVampire_Anthropic_Evidence_Legal_20261006.svg" alt="TokenVampire evidence-first AI audit framework" width="100%">
+</p>
+
+> **A fluent system can sound intelligent and still fail the job. TokenVampire records what was requested, what was delivered, what was charged, and what the evidence can actually prove.**
 
 TokenVampire is a local-first evidence, billing, subscription, and AI-delivery assurance system for individuals first and organizations second.
 
-It is built around a simple idea:
+It does not grade AI by personality, confidence, brand, valuation, or marketing language. It grades observable delivery.
 
-**Intelligence is not the confidence of the answer. It is whether the requested work was delivered, supported by evidence, reconciled with what was charged, and reproducible by someone other than the model that produced it.**
+## The Wrapper Ledger
 
-A fluent answer can still be incomplete.  
-A successful API response can still produce a failed task.  
-A citation can be syntactically valid and still fail to support the claim.  
-A usage limit can be consumed without telling you whether the resulting work was useful.  
-A credit top-up is not measured spend.  
-Missing records are not zero.
+Conversational systems can present a human-like surface: first-person language, confidence, memory cues, reassurance, and apparent certainty.
 
-TokenVampire exists to preserve those distinctions.
+TokenVampire deliberately ignores that surface.
+
+It asks a smaller set of harder questions:
+
+1. **What did the user request?**
+2. **What did the system claim it did?**
+3. **What observable artifact proves delivery?**
+4. **What evidence supports the material claims?**
+5. **What usage and money were actually recorded?**
+6. **What repeat work or rework was required?**
+7. **What remedy, credit, reset, refund, or provider response actually occurred?**
+
+The result is a ledger, not a personality judgment.
+
+> **Generated language is a claim. Observable evidence is a different thing.**
 
 ## Governing principle
 
 > **No evidence, no finding. No consent, no export. No verified amount, no loss total. No human approval, no submission.**
 
-The software does not care how famous the vendor is, how persuasive the model sounds, or how large the company valuation is.
+## One standard for every vendor
 
-It asks:
-
-1. **What did the user request?**
-2. **What did the system claim it did?**
-3. **What observable artifact proves delivery?**
-4. **What evidence supports the answer?**
-5. **What usage and money were actually recorded?**
-6. **What rework was required?**
-7. **What remedy, credit, reset, refund, or response actually occurred?**
-
-## One standard for every AI vendor
-
-The audit method is vendor-neutral:
-
-**OpenAI · Google · Anthropic · xAI · Microsoft · Meta · Perplexity · and any other provider**
+**OpenAI · Google · Anthropic · xAI · Microsoft · Meta · Perplexity · any other provider**
 
 The company name does not change the test. Payment does not change the score.
 
-![TokenVampire evidence-first audit](research/anthropic/2026-10-06/TokenVampire_Anthropic_Evidence_Legal_20261006.svg)
+### Six audit controls
 
-## The reality of "intelligence"
-
-TokenVampire does not use an LLM's self-description as proof that a task succeeded.
-
-| What an AI system may say | What TokenVampire asks |
+| Control | Question |
 | --- | --- |
-| "I completed the task." | Where is the artifact, and can it be independently inspected? |
-| "The source supports this." | Does the source semantically support the exact claim? |
-| "The request succeeded." | Did the user's acceptance criteria succeed? |
-| "Your usage was reset." | Was usage capacity reset, was credit restored, or was cash refunded? These are different events. |
-| "No usage is shown." | Is the value actually zero, or is it unknown? |
-| "The file hash matches." | Does it prove file identity/integrity only, or is someone incorrectly treating it as proof that every claim inside the file is true? |
+| **Delivery truth** | Was the requested work actually delivered as claimed? |
+| **Semantic support** | Do the cited sources and data support the material claim? |
+| **Cost & rework** | What usage, charges, retries, and repeat work actually occurred? |
+| **Editorial consistency** | Did the system materially alter names, facts, scope, or conclusions without instruction? |
+| **User agency & privacy** | Does the user retain control over evidence, data, consent, and export? |
+| **Challenge & remedy** | Is there a traceable dispute path and a recorded provider response or remedy? |
 
-The core distinction is:
+## Reality check: what "intelligence" does not prove
 
-> **Generated language is a claim. Observable evidence is a different thing.**
+| What a system may say | What the audit requires |
+| --- | --- |
+| **"I completed the task."** | An observable artifact that can be independently inspected. |
+| **"The source supports this."** | Semantic support for the exact material claim. |
+| **"The request succeeded."** | The user's acceptance criteria actually passing. |
+| **"Your usage was reset."** | A distinction between limit reset, restored credit, and cash refund. |
+| **"No usage is shown."** | Proof that the value is zero rather than unknown or unavailable. |
+| **"The hash matches."** | File identity/integrity only; not automatic truth of every statement inside the file. |
 
 ## Public evidence example — Anthropic / Claude
 
-TokenVampire includes a dated public-source study because audit rules should be demonstrated against real, named vendors rather than abstract examples.
+The repository includes a dated public-source study using a real, named vendor so the audit method can be inspected against public evidence rather than hypothetical examples.
 
-### 23 April 2026 — Anthropic postmortem
+### Documented facts
 
-Anthropic published a Claude Code quality postmortem describing three product changes affecting Claude Code, Claude Agent SDK, and Cowork. It described a context-management bug that repeatedly dropped prior reasoning and caused cache misses, and said it **believes this drove reports of usage limits draining faster than expected**. Anthropic also said subscriber usage limits were reset and that the API/inference layer was not impacted.
+| Record | Documented figure or event | Source |
+| --- | --- | --- |
+| **Anthropic postmortem — 23 Apr 2026** | Anthropic described three product changes affecting Claude Code, Claude Agent SDK, and Cowork. It reported a context-management bug that repeatedly dropped prior reasoning and caused cache misses, and said it believes this drove reports of usage limits draining faster than expected. Subscriber usage limits were reset. | [Anthropic](https://www.anthropic.com/engineering/april-23-postmortem) |
+| **claude.ai review snapshot — 6 Oct 2026** | **2,029 reviews; 80% 1-star** | [Trustpilot](https://www.trustpilot.com/review/claude.ai) |
+| **anthropic.com review snapshot — 6 Oct 2026** | **499 reviews; 88% 1-star** | [Trustpilot](https://www.trustpilot.com/review/anthropic.com) |
+| **Series H — 28 May 2026** | **$65B raised; $965B post-money valuation** | [Anthropic](https://www.anthropic.com/news/series-h) |
+| **Revenue run-rate — end Jul 2026** | **>$65B annual revenue run-rate** reported by Reuters | [Reuters syndicated report](https://www.investing.com/news/stock-market-news/anthropic-revenue-run-rate-tops-65-billion-source-says-4864031) |
+| **METR study — Jul 2025** | **16 experienced developers, 246 tasks; AI-allowed work took 19% longer in that study setting** | [METR](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/) |
 
-Source: [Anthropic — April 23 postmortem](https://www.anthropic.com/engineering/april-23-postmortem)
+TokenVampire preserves each item at the level the source supports. A review count stays a review count. A valuation stays a valuation. A run-rate stays a run-rate. A provider statement stays a provider statement. A user report stays a user report until independently reproduced.
 
-### Public review snapshot — 6 October 2026
+**The repository presents the record. Readers, auditors, regulators, customers, and courts can draw their own conclusions from the evidence.**
 
-The research snapshot recorded:
+### Research files
 
-- **claude.ai:** 2,029 Trustpilot reviews; **80% 1-star**
-- **anthropic.com:** 499 Trustpilot reviews; **88% 1-star**
+- [Anthropic / Claude research package](research/anthropic/2026-10-06/)
+- [Infographic sources](research/anthropic/2026-10-06/INFOGRAPHIC_SOURCES.md)
+- [Public issue register](research/anthropic/2026-10-06/public_issue_register.csv)
+- [Source register](research/anthropic/2026-10-06/source_register.csv)
+- [Methodology](research/anthropic/2026-10-06/METHODOLOGY.md)
 
-These are preserved as public review counts. TokenVampire does not silently convert self-selected reviews into a population-wide failure rate.
+## Rules of evidence
 
-Sources: [claude.ai on Trustpilot](https://www.trustpilot.com/review/claude.ai) · [anthropic.com on Trustpilot](https://www.trustpilot.com/review/anthropic.com)
-
-### Financial scale
-
-Anthropic announced on **28 May 2026** that it raised **$65 billion** in Series H funding at a **$965 billion post-money valuation**. Reuters later reported that Anthropic's annual revenue run-rate topped **$65 billion by the end of July 2026**.
-
-A valuation is not cash. A run-rate is not audited full-year revenue. Those distinctions are preserved because financial scale does not replace evidence.
-
-Sources: [Anthropic Series H](https://www.anthropic.com/news/series-h) · [Reuters syndicated report](https://www.investing.com/news/stock-market-news/anthropic-revenue-run-rate-tops-65-billion-source-says-4864031)
-
-### Productivity is measurable too
-
-METR's July 2025 randomized study covered **16 experienced open-source developers and 246 tasks**. In that study setting, early-2025 AI tooling—primarily Cursor Pro with Claude 3.5/3.7 Sonnet in the AI-allowed condition—made the measured tasks take **19% longer**.
-
-That result is not a timeless score for every model. It demonstrates why productivity should be measured rather than assumed.
-
-Source: [METR — early-2025 AI experienced open-source developer study](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/)
-
-The full research package, public issue register, methodology, and source register are preserved under:
-
-- [research/anthropic/2026-10-06/](research/anthropic/2026-10-06/)
-- [INFOGRAPHIC_SOURCES.md](research/anthropic/2026-10-06/INFOGRAPHIC_SOURCES.md)
-- [public_issue_register.csv](research/anthropic/2026-10-06/public_issue_register.csv)
-- [source_register.csv](research/anthropic/2026-10-06/source_register.csv)
-
-## Six audit controls
-
-1. **Delivery truth** — Was the requested work actually delivered as claimed?
-2. **Semantic support** — Are material claims supported by verifiable sources and data?
-3. **Cost and rework** — What usage, cost, retries, and repeat work actually occurred?
-4. **Editorial consistency** — Did the system materially change facts, named entities, or conclusions without instruction?
-5. **User agency and privacy** — Does the user retain control over evidence, data, and export?
-6. **Challenge and remedy** — Is there a traceable way to dispute a result and record the provider's response or remedy?
-
-## Evidence rules
-
-TokenVampire keeps accounting and evidence states explicit:
-
-- **Missing data = unknown, never zero.**
+- **Missing data = UNKNOWN, never zero.**
 - **Credit top-up ≠ measured spend.**
 - **Usage-limit reset ≠ cash refund.**
 - **A failed probe ≠ a failed project.**
 - **Valid citation syntax ≠ semantic support.**
-- **A cryptographic hash proves the identity/integrity of a file version, not the truth of every statement inside it.**
+- **A cryptographic hash proves file identity/integrity, not claim truth.**
 - **No LLM may be the sole judge of a material finding.**
 
-Canonical evidence states include: **Verified, ProviderReported, UserAsserted, Estimated, ScenarioOnly, and Unknown.**
+Canonical evidence states include:
+
+`Verified` · `ProviderReported` · `UserAsserted` · `Estimated` · `ScenarioOnly` · `Unknown`
 
 ## Legal and governance basis
 
-TokenVampire records facts first and keeps legal conclusions outside the automatic scoring engine.
+TokenVampire records technical and financial facts first. Legal classification is kept separate from the automatic scoring engine.
 
-For Saudi use cases, relevant sources include:
+For Saudi use cases, relevant public sources include:
 
 - [Saudi E-Commerce Law](https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/360de590-0286-4fa5-a243-aa9100c31979/1)
-- [Saudi Ministry of Commerce guidance on electronically provided services](https://mc.gov.sa/ar/mediacenter/News/Pages/10-07-19-01.aspx)
+- [Saudi Ministry of Commerce — electronically provided services and E-Commerce Law](https://mc.gov.sa/ar/mediacenter/News/Pages/10-07-19-01.aspx)
 - [Saudi Personal Data Protection Law / National Data Governance Platform](https://dgp.sdaia.gov.sa/wps/portal/pdp/knowledgecenter/details/GPDPL)
 
-Governance references include [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) and ISO/IEC 42001. They are governance references, not substitutes for applicable law.
+Governance references include [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) and ISO/IEC 42001. These are governance references, not substitutes for applicable law.
 
 ## What is implemented
 
@@ -154,7 +134,7 @@ The repository currently contains implemented building blocks for:
 - unit and architecture tests;
 - cross-platform CI.
 
-Desktop and broader organization/server experiences remain under development. Passing tests prove the tested behavior at a specific revision; they do not prove that the entire product is complete or that every external claim is true.
+Desktop and broader organization/server experiences remain under development. Passing tests prove the tested behavior at a specific revision; they do not prove that the entire product is complete.
 
 ## Architecture
 
@@ -180,6 +160,6 @@ Desktop and broader organization/server experiences remain under development. Pa
 
 TokenVampire is not another AI personality.
 
-**It is a meter.**
+**It is an evidence meter.**
 
-It preserves the request, the output, the evidence, the usage, the money, the missing data, and the remedy—then lets a human reviewer see the difference between **what intelligence claimed** and **what reality can prove**.
+It preserves the request, output, artifacts, usage, money, missing data, provenance, and remedy—so the difference between **what a system said** and **what reality can prove** remains inspectable.

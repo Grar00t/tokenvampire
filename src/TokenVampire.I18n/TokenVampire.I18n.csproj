@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk">
+ <PropertyGroup></PropertyGroup>
+ <ItemGroup>
+  <ProjectReference Include="../../src/TokenVampire.Domain/TokenVampire.Domain.csproj" />
+ </ItemGroup>
+</Project>

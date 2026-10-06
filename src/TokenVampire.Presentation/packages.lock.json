@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "dependencies": {
+    "net10.0": {
+      "tokenvampire.application": {
+        "type": "Project",
+        "dependencies": {
+          "TokenVampire.Domain": "[1.0.0, )"
+        }
+      },
+      "tokenvampire.domain": {
+        "type": "Project"
+      },
+      "tokenvampire.i18n": {
+        "type": "Project",
+        "dependencies": {
+          "TokenVampire.Domain": "[1.0.0, )"
+        }
+      }
+    }
+  }
+}

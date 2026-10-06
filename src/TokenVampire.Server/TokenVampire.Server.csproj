@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+ <PropertyGroup></PropertyGroup>
+ <ItemGroup>
+  <ProjectReference Include="../../src/TokenVampire.Application/TokenVampire.Application.csproj" />
+  <ProjectReference Include="../../src/TokenVampire.Infrastructure/TokenVampire.Infrastructure.csproj" />
+ </ItemGroup>
+</Project>

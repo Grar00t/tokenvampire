@@ -14,3 +14,10 @@ jobs:
       - run: dotnet restore
       - run: dotnet build -c Release --no-restore -warnaserror
       - run: dotnet test -c Release --no-build
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with: { global-json-file: global.json }
+      - run: ./scripts/verify.sh

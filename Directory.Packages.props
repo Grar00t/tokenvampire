@@ -6,5 +6,6 @@
   <ItemGroup>
     <!-- Package versions are added only after a reviewed ADR and version verification. -->
     <PackageVersion Include="xunit.v3" Version="4.0.1" />
+    <PackageVersion Include="Microsoft.Data.Sqlite" Version="10.0.12" />
   </ItemGroup>
 </Project>

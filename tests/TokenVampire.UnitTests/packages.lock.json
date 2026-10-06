@@ -187,6 +187,12 @@
           "TokenVampire.Domain": "[1.0.0, )"
         }
       },
+      "tokenvampire.i18n": {
+        "type": "Project",
+        "dependencies": {
+          "TokenVampire.Domain": "[1.0.0, )"
+        }
+      },
       "tokenvampire.infrastructure": {
         "type": "Project",
         "dependencies": {
@@ -194,6 +200,14 @@
           "TokenVampire.Application": "[1.0.0, )",
           "TokenVampire.Domain": "[1.0.0, )",
           "TokenVampire.Evidence": "[1.0.0, )"
+        }
+      },
+      "tokenvampire.reporting": {
+        "type": "Project",
+        "dependencies": {
+          "TokenVampire.Application": "[1.0.0, )",
+          "TokenVampire.Domain": "[1.0.0, )",
+          "TokenVampire.I18n": "[1.0.0, )"
         }
       },
       "Microsoft.Data.Sqlite": {

@@ -17,6 +17,10 @@
     <Project Path="src/TokenVampire.Reporting/TokenVampire.Reporting.csproj" />
     <Project Path="src/TokenVampire.Server/TokenVampire.Server.csproj" />
   </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/TokenVampire.ArchitectureTests/TokenVampire.ArchitectureTests.csproj" />
+    <Project Path="tests/TokenVampire.UnitTests/TokenVampire.UnitTests.csproj" />
+  </Folder>
   <Folder Name="/workers/">
     <Project Path="workers/TokenVampire.ParserWorker/TokenVampire.ParserWorker.csproj" />
   </Folder>

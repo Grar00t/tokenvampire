@@ -2,7 +2,7 @@
 
 Snapshot date: **2026-10-06**
 
-This file supports the public factual statements in `TokenVampire_Anthropic_Evidence_Legal_20261006.svg`.
+This file supports the public factual statements in `TokenVampire_Anthropic_Evidence_Legal_20261006.png` and the corresponding SVG source.
 
 ## Anthropic / Claude
 

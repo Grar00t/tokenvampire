@@ -5,7 +5,8 @@ public class EvidenceTests
 {
     static string Tmp(string text) { var p = Path.GetTempFileName(); File.WriteAllText(p, text); return p; }
 
-    [Fact] public async Task Seal_then_verify_ok()
+    [Fact]
+    public async Task Seal_then_verify_ok()
     {
         var p = Tmp("abc");
         var s = await EvidenceSealer.SealAsync("e1", p, TimeProvider.System, TestContext.Current.CancellationToken);
@@ -13,7 +14,8 @@ public class EvidenceTests
         Assert.True(await EvidenceSealer.VerifyAsync(s, p, TestContext.Current.CancellationToken));
     }
 
-    [Fact] public async Task Modified_file_fails_verify()
+    [Fact]
+    public async Task Modified_file_fails_verify()
     {
         var p = Tmp("abc");
         var s = await EvidenceSealer.SealAsync("e1", p, TimeProvider.System, TestContext.Current.CancellationToken);
@@ -21,7 +23,8 @@ public class EvidenceTests
         Assert.False(await EvidenceSealer.VerifyAsync(s, p, TestContext.Current.CancellationToken));
     }
 
-    [Fact] public async Task Manifest_detects_tamper()
+    [Fact]
+    public async Task Manifest_detects_tamper()
     {
         var p = Tmp("abc");
         var s = await EvidenceSealer.SealAsync("e1", p, TimeProvider.System, TestContext.Current.CancellationToken);
@@ -31,14 +34,16 @@ public class EvidenceTests
         Assert.False(bad.IsIntact());
     }
 
-    [Fact] public async Task Manifest_json_roundtrip()
+    [Fact]
+    public async Task Manifest_json_roundtrip()
     {
         var p = Tmp("abc");
         var m = Manifest.Build([await EvidenceSealer.SealAsync("e1", p, TimeProvider.System, TestContext.Current.CancellationToken)]);
         Assert.True(Manifest.FromJson(m.ToJson()).IsIntact());
     }
 
-    [Fact] public async Task Duplicate_ids_rejected()
+    [Fact]
+    public async Task Duplicate_ids_rejected()
     {
         var p = Tmp("abc");
         var s = await EvidenceSealer.SealAsync("e1", p, TimeProvider.System, TestContext.Current.CancellationToken);

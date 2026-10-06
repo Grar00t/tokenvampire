@@ -11,14 +11,16 @@ public class StorageTests
         return new Vault(dir, key ?? RandomNumberGenerator.GetBytes(32));
     }
 
-    [Fact] public async Task Vault_roundtrip()
+    [Fact]
+    public async Task Vault_roundtrip()
     {
         var v = V(out _);
         await v.PutAsync("e1", [1, 2, 3], TestContext.Current.CancellationToken);
         Assert.Equal(new byte[] { 1, 2, 3 }, await v.GetAsync("e1", TestContext.Current.CancellationToken));
     }
 
-    [Fact] public async Task Vault_file_is_not_plaintext()
+    [Fact]
+    public async Task Vault_file_is_not_plaintext()
     {
         var v = V(out var dir);
         var plain = System.Text.Encoding.UTF8.GetBytes("SECRET-MARKER-12345");
@@ -27,7 +29,8 @@ public class StorageTests
         Assert.DoesNotContain("SECRET-MARKER", System.Text.Encoding.UTF8.GetString(raw));
     }
 
-    [Fact] public async Task Vault_tamper_detected()
+    [Fact]
+    public async Task Vault_tamper_detected()
     {
         var v = V(out var dir);
         await v.PutAsync("e1", [9, 9, 9, 9], TestContext.Current.CancellationToken);
@@ -38,7 +41,8 @@ public class StorageTests
         await Assert.ThrowsAnyAsync<CryptographicException>(() => v.GetAsync("e1", TestContext.Current.CancellationToken));
     }
 
-    [Fact] public async Task Vault_wrong_key_fails()
+    [Fact]
+    public async Task Vault_wrong_key_fails()
     {
         var v1 = V(out var dir);
         await v1.PutAsync("e1", [1], TestContext.Current.CancellationToken);
@@ -46,10 +50,12 @@ public class StorageTests
         await Assert.ThrowsAnyAsync<CryptographicException>(() => v2.GetAsync("e1", TestContext.Current.CancellationToken));
     }
 
-    [Fact] public async Task Vault_rejects_path_traversal() =>
+    [Fact]
+    public async Task Vault_rejects_path_traversal() =>
         await Assert.ThrowsAsync<ArgumentException>(() => V(out _).PutAsync("../x", [1], TestContext.Current.CancellationToken));
 
-    [Fact] public void Store_roundtrip()
+    [Fact]
+    public void Store_roundtrip()
     {
         var db = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString("N") + ".db");
         using var s = new EvidenceStore(db);

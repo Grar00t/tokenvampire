@@ -25,3 +25,6 @@ secrets.json
 *.key
 *.pem
 ledger.local.json
+report-*.txt
+.env
+*.env

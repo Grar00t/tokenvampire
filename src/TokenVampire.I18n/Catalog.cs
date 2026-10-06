@@ -59,6 +59,18 @@ public sealed class Catalog
         c.Set("ar", "report.not_measured", "غير مقاس");
         c.Set("ar", "report.gaps", "الفجوات المعلنة");
         c.Set("ar", "report.boundary", "الرقم المفقود مجهول وليس صفراً. وهذا ليس استحقاقاً قانونياً لاسترداد.");
+        c.Set("en", "report.none", "none recorded");
+        c.Set("en", "report.items", "item(s)");
+        c.Set("en", "report.subs", "Subscriptions");
+        c.Set("en", "report.seats", "Seat licenses");
+        c.Set("en", "report.refunds", "Refunds");
+        c.Set("en", "report.credits", "Credits");
+        c.Set("ar", "report.none", "لا يوجد");
+        c.Set("ar", "report.items", "بند");
+        c.Set("ar", "report.subs", "الاشتراكات");
+        c.Set("ar", "report.seats", "تراخيص المقاعد");
+        c.Set("ar", "report.refunds", "المستردات");
+        c.Set("ar", "report.credits", "الأرصدة الممنوحة");
         return c;
     }
 }

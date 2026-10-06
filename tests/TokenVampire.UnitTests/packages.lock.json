@@ -129,8 +129,21 @@
           "xunit.v3.runner.common": "[4.0.1]"
         }
       },
+      "tokenvampire.application": {
+        "type": "Project",
+        "dependencies": {
+          "TokenVampire.Domain": "[1.0.0, )"
+        }
+      },
       "tokenvampire.domain": {
         "type": "Project"
+      },
+      "tokenvampire.evidence": {
+        "type": "Project",
+        "dependencies": {
+          "TokenVampire.Application": "[1.0.0, )",
+          "TokenVampire.Domain": "[1.0.0, )"
+        }
       }
     }
   }

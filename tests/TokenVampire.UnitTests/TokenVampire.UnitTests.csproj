@@ -3,5 +3,5 @@
  <ItemGroup>
   <PackageReference Include="xunit.v3" />
  </ItemGroup>
- <ItemGroup><ProjectReference Include="../../src/TokenVampire.Domain/TokenVampire.Domain.csproj" /></ItemGroup>
+ <ItemGroup><ProjectReference Include="../../src/TokenVampire.Domain/TokenVampire.Domain.csproj" /><ProjectReference Include="../../src/TokenVampire.Evidence/TokenVampire.Evidence.csproj" /></ItemGroup>
 </Project>

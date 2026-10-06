@@ -8,4 +8,5 @@ public readonly record struct Measured<T>(T? Value, Provenance Provenance) where
     public static Measured<T> Of(T v) => new(v, Provenance.Measured);
     public static Measured<T> Assume(T v) => new(v, Provenance.Assumed);
     public bool IsKnown => Provenance != Provenance.Unknown && Value.HasValue;
+    public bool IsMeasured => Provenance == Provenance.Measured && Value.HasValue;
 }

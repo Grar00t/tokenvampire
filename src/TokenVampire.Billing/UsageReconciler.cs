@@ -13,9 +13,9 @@ public static class UsageReconciler
     public static ReconResult Reconcile(IEnumerable<UsageLine> lines, Measured<decimal> invoiceTotal, decimal tolerance = 0.005m)
     {
         var ls = lines.ToArray();
-        if (!invoiceTotal.IsKnown) return new(ReconStatus.NotEstablished, null, "Invoice total unknown.");
-        if (ls.Length == 0 || ls.Any(l => !l.Cost.IsKnown))
-            return new(ReconStatus.NotEstablished, null, "Usage cost unknown for at least one line; unknown is not zero.");
+        if (!invoiceTotal.IsMeasured) return new(ReconStatus.NotEstablished, null, "Invoice total not measured (unknown or assumed).");
+        if (ls.Length == 0 || ls.Any(l => !l.Cost.IsMeasured))
+            return new(ReconStatus.NotEstablished, null, "Usage cost not measured for at least one line; unknown or assumed is not evidence.");
         var sum = ls.Sum(l => l.Cost.Value!.Value);
         var diff = invoiceTotal.Value!.Value - sum;
         return Math.Abs(diff) <= tolerance

@@ -75,6 +75,14 @@
           "TokenVampire.I18n": "[1.0.0, )"
         }
       },
+      "tokenvampire.reporting": {
+        "type": "Project",
+        "dependencies": {
+          "TokenVampire.Application": "[1.0.0, )",
+          "TokenVampire.Domain": "[1.0.0, )",
+          "TokenVampire.I18n": "[1.0.0, )"
+        }
+      },
       "Microsoft.Data.Sqlite": {
         "type": "CentralTransitive",
         "requested": "[10.0.12, )",

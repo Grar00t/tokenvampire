@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1900" viewBox="0 0 1200 1900">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#071b33"/>
+      <stop offset="1" stop-color="#02111f"/>
+    </linearGradient>
+    <style>
+      .h1{font:800 64px Arial,sans-serif;fill:#fff}
+      .h2{font:800 34px Arial,sans-serif;fill:#fff}
+      .sub{font:500 24px Arial,sans-serif;fill:#d7e3f3}
+      .cardh{font:700 24px Arial,sans-serif;fill:#071b33}
+      .body{font:400 20px Arial,sans-serif;fill:#10233d}
+      .small{font:400 17px Arial,sans-serif;fill:#203752}
+      .whiteSmall{font:500 18px Arial,sans-serif;fill:#d7e3f3}
+      .vendor{font:700 21px Arial,sans-serif;fill:#0b1e35}
+      .num{font:800 24px Arial,sans-serif;fill:#fff;text-anchor:middle;dominant-baseline:middle}
+    </style>
+  </defs>
+  <rect width="1200" height="1900" fill="url(#bg)"/>
+
+  <text x="48" y="68" font-family="Arial" font-size="42" font-weight="800" fill="#ffffff">Token<tspan fill="#2b8cff">Vampire</tspan></text>
+  <text x="48" y="98" class="whiteSmall">AI USAGE • BILLING • EVIDENCE • ACCOUNTABILITY</text>
+
+  <text x="600" y="180" class="h1" text-anchor="middle">AUDIT BY EVIDENCE.</text>
+  <text x="600" y="250" class="h1" text-anchor="middle">ACCOUNTABILITY BY LAW.</text>
+  <text x="600" y="295" class="sub" text-anchor="middle">One audit standard for every AI vendor. No evidence, no finding.</text>
+
+  <rect x="32" y="330" width="1136" height="180" rx="18" fill="#092843" stroke="#3f89c9"/>
+  <text x="52" y="370" class="h2">ONE STANDARD, SEVEN VENDORS</text>
+  <text x="1120" y="370" class="whiteSmall" text-anchor="end">Same tests for all. Payment never changes the score.</text>
+  <rect x="48" y="397" width="140" height="84" rx="14" fill="#f7f9fc"/><text x="118" y="448" class="vendor" text-anchor="middle">OpenAI</text><rect x="208" y="397" width="140" height="84" rx="14" fill="#f7f9fc"/><text x="278" y="448" class="vendor" text-anchor="middle">Google</text><rect x="368" y="397" width="140" height="84" rx="14" fill="#efe2d2"/><text x="438" y="448" class="vendor" text-anchor="middle">Anthropic</text><rect x="528" y="397" width="140" height="84" rx="14" fill="#f7f9fc"/><text x="598" y="448" class="vendor" text-anchor="middle">xAI</text><rect x="688" y="397" width="140" height="84" rx="14" fill="#f7f9fc"/><text x="758" y="448" class="vendor" text-anchor="middle">Microsoft</text><rect x="848" y="397" width="140" height="84" rx="14" fill="#f7f9fc"/><text x="918" y="448" class="vendor" text-anchor="middle">Meta</text><rect x="1008" y="397" width="140" height="84" rx="14" fill="#f7f9fc"/><text x="1078" y="448" class="vendor" text-anchor="middle">Perplexity</text>
+
+  <rect x="32" y="535" width="1136" height="470" rx="18" fill="#092843" stroke="#3f89c9"/>
+  <text x="52" y="578" class="h2">DOCUMENTED FACTS — ANTHROPIC / CLAUDE</text>
+  <text x="1120" y="573" class="whiteSmall" text-anchor="end">Figures and dates from public sources • snapshot 6 Oct 2026</text>
+
+  <rect x="48" y="610" width="252" height="365" rx="16" fill="#f5f8fb"/>
+      <circle cx="80" cy="644" r="22" fill="#2b8cff"/><text x="80" y="644" class="num">1</text>
+      <text x="110" y="650" class="cardh" font-size="19">23 APR 2026 — ANTHROPIC POSTMORTEM</text>
+      <text x="68" y="690" class="body">Three product changes affected Claude Code,</text><text x="68" y="723" class="body">Claude Agent SDK and Cowork.</text><text x="68" y="756" class="body">A context bug repeatedly dropped prior reasoning</text><text x="68" y="789" class="body">and caused cache misses; Anthropic said it</text><text x="68" y="822" class="body">believes this drove reports of usage limits</text><text x="68" y="855" class="body">draining faster than expected.</text><text x="68" y="888" class="body">Usage limits were reset for all subscribers.</text><text x="68" y="921" class="body">Anthropic said API / inference were not impacted.</text><rect x="332" y="610" width="252" height="365" rx="16" fill="#f5f8fb"/>
+      <circle cx="364" cy="644" r="22" fill="#2b8cff"/><text x="364" y="644" class="num">2</text>
+      <text x="394" y="650" class="cardh" font-size="19">TRUSTPILOT SNAPSHOT</text>
+      <text x="352" y="690" class="body">claude.ai</text><text x="352" y="723" class="cardh">2,029 reviews • 80% 1-star</text><text x="352" y="756" class="body"></text><text x="352" y="789" class="body">anthropic.com</text><text x="352" y="822" class="body">499 reviews • 88% 1-star</text><text x="352" y="855" class="body"></text><text x="352" y="888" class="body">Public review counts. They are recorded as</text><text x="352" y="921" class="body">public complaints, not converted into a failure rate.</text><rect x="616" y="610" width="252" height="365" rx="16" fill="#f5f8fb"/>
+      <circle cx="648" cy="644" r="22" fill="#2b8cff"/><text x="648" y="644" class="num">3</text>
+      <text x="678" y="650" class="cardh" font-size="19">FINANCIAL SCALE</text>
+      <text x="636" y="690" class="body">28 May 2026:</text><text x="636" y="723" class="body">$65B Series H raised</text><text x="636" y="756" class="body">$965B post-money valuation</text><text x="636" y="789" class="body"></text><text x="636" y="822" class="body">End of Jul 2026:</text><text x="636" y="855" class="body">>$65B annual revenue run-rate</text><text x="636" y="888" class="body">(Reuters, 17 Aug 2026)</text><text x="636" y="921" class="body">Run-rate ≠ audited full-year revenue.</text><rect x="900" y="610" width="252" height="365" rx="16" fill="#f5f8fb"/>
+      <circle cx="932" cy="644" r="22" fill="#2b8cff"/><text x="932" y="644" class="num">4</text>
+      <text x="962" y="650" class="cardh" font-size="19">METR 2025 RANDOMIZED STUDY</text>
+      <text x="920" y="690" class="body">16 experienced open-source developers</text><text x="920" y="723" class="body">246 tasks</text><text x="920" y="756" class="body">Primarily Cursor Pro with Claude 3.5 / 3.7</text><text x="920" y="789" class="body">Sonnet in the AI-allowed condition</text><text x="920" y="822" class="body"></text><text x="920" y="855" class="body">Observed result: tasks took 19% longer</text><text x="920" y="888" class="body">with early-2025 AI tools in that study setting.</text>
+
+  <rect x="32" y="1030" width="1136" height="250" rx="18" fill="#092843" stroke="#3f89c9"/>
+  <text x="52" y="1072" class="h2">SIX AUDIT CONTROLS</text>
+  <rect x="48" y="1100" width="168" height="150" rx="14" fill="#f5f8fb"/>
+      <circle cx="76" cy="1128" r="20" fill="#16b978"/>
+      <text x="76" y="1128" class="num">1</text>
+      <text x="132" y="1168" class="cardh" text-anchor="middle" font-size="18">Delivery truth</text>
+      <text x="132" y="1200" class="small" text-anchor="middle">Was the requested work deli</text>
+      <text x="132" y="1225" class="small" text-anchor="middle">vered as claimed?</text><rect x="232" y="1100" width="168" height="150" rx="14" fill="#f5f8fb"/>
+      <circle cx="260" cy="1128" r="20" fill="#2387ff"/>
+      <text x="260" y="1128" class="num">2</text>
+      <text x="316" y="1168" class="cardh" text-anchor="middle" font-size="18">Semantic support</text>
+      <text x="316" y="1200" class="small" text-anchor="middle">Are claims supported by ver</text>
+      <text x="316" y="1225" class="small" text-anchor="middle">ifiable citations and data?</text><rect x="416" y="1100" width="168" height="150" rx="14" fill="#f5f8fb"/>
+      <circle cx="444" cy="1128" r="20" fill="#ffb21f"/>
+      <text x="444" y="1128" class="num">3</text>
+      <text x="500" y="1168" class="cardh" text-anchor="middle" font-size="18">Cost & rework</text>
+      <text x="500" y="1200" class="small" text-anchor="middle">What was actual usage, cost</text>
+      <text x="500" y="1225" class="small" text-anchor="middle"> and repeat work?</text><rect x="600" y="1100" width="168" height="150" rx="14" fill="#f5f8fb"/>
+      <circle cx="628" cy="1128" r="20" fill="#ff4a3d"/>
+      <text x="628" y="1128" class="num">4</text>
+      <text x="684" y="1168" class="cardh" text-anchor="middle" font-size="18">Editorial consistency</text>
+      <text x="684" y="1200" class="small" text-anchor="middle">Are outputs consistent and </text>
+      <text x="684" y="1225" class="small" text-anchor="middle">free from contradictions?</text><rect x="784" y="1100" width="168" height="150" rx="14" fill="#f5f8fb"/>
+      <circle cx="812" cy="1128" r="20" fill="#7c4dff"/>
+      <text x="812" y="1128" class="num">5</text>
+      <text x="868" y="1168" class="cardh" text-anchor="middle" font-size="18">User agency & privacy</text>
+      <text x="868" y="1200" class="small" text-anchor="middle">Does the user control data </text>
+      <text x="868" y="1225" class="small" text-anchor="middle">and usage?</text><rect x="968" y="1100" width="168" height="150" rx="14" fill="#f5f8fb"/>
+      <circle cx="996" cy="1128" r="20" fill="#14b8a6"/>
+      <text x="996" y="1128" class="num">6</text>
+      <text x="1052" y="1168" class="cardh" text-anchor="middle" font-size="18">Challenge & remedy</text>
+      <text x="1052" y="1200" class="small" text-anchor="middle">Is there a clear dispute an</text>
+      <text x="1052" y="1225" class="small" text-anchor="middle">d remedy process?</text>
+
+  <rect x="32" y="1305" width="1136" height="320" rx="18" fill="#092843" stroke="#3f89c9"/>
+  <text x="52" y="1348" class="h2">LEGAL / GOVERNANCE BASIS — SAUDI ARABIA</text>
+  <text x="1120" y="1343" class="whiteSmall" text-anchor="end">Law first. Frameworks are labeled as frameworks, not statutes.</text>
+
+  <rect x="48" y="1380" width="350" height="210" rx="14" fill="#f5f8fb"/>
+  <text x="70" y="1420" class="cardh">Saudi E-Commerce Law</text>
+  <text x="70" y="1455" class="body">Requires disclosure of service characteristics,</text>
+  <text x="70" y="1482" class="body">total price / charges, payment and execution terms,</text>
+  <text x="70" y="1509" class="body">and an itemized invoice. Electronic ads are part</text>
+  <text x="70" y="1536" class="body">of the contract; deceptive or misleading electronic</text>
+  <text x="70" y="1563" class="body">advertising is prohibited.</text>
+
+  <rect x="424" y="1380" width="350" height="210" rx="14" fill="#f5f8fb"/>
+  <text x="446" y="1420" class="cardh">Consumer remedies</text>
+  <text x="446" y="1455" class="body">Saudi Ministry of Commerce states online services</text>
+  <text x="446" y="1482" class="body">are covered by the E-Commerce Law. Certain refund</text>
+  <text x="446" y="1509" class="body">and cancellation rights apply to qualifying facts,</text>
+  <text x="446" y="1536" class="body">including statutory conditions and exceptions.</text>
+
+  <rect x="800" y="1380" width="350" height="210" rx="14" fill="#f5f8fb"/>
+  <text x="822" y="1420" class="cardh">PDPL + governance frameworks</text>
+  <text x="822" y="1455" class="body">PDPL applies where personal-data processing is involved.</text>
+  <text x="822" y="1482" class="body">NIST AI RMF and ISO/IEC 42001 are governance</text>
+  <text x="822" y="1509" class="body">references—not statutes and not refund laws.</text>
+
+  <rect x="32" y="1650" width="1136" height="165" rx="18" fill="#092843" stroke="#3f89c9"/>
+  <text x="52" y="1692" class="h2">RULES OF EVIDENCE</text>
+  <rect x="48" y="1720" width="204" height="66" rx="12" fill="#f5f8fb"/><text x="150" y="1750" class="small" text-anchor="middle">Missing data = UNKNOWN, never</text><text x="150" y="1773" class="small" text-anchor="middle"> zero</text><rect x="268" y="1720" width="204" height="66" rx="12" fill="#f5f8fb"/><text x="370" y="1750" class="small" text-anchor="middle">Credit top-up ≠ spend</text><text x="370" y="1773" class="small" text-anchor="middle"></text><rect x="488" y="1720" width="204" height="66" rx="12" fill="#f5f8fb"/><text x="590" y="1750" class="small" text-anchor="middle">Usage-limit reset ≠ cash refu</text><text x="590" y="1773" class="small" text-anchor="middle">nd</text><rect x="708" y="1720" width="204" height="66" rx="12" fill="#f5f8fb"/><text x="810" y="1750" class="small" text-anchor="middle">Hash proves file identity, no</text><text x="810" y="1773" class="small" text-anchor="middle">t claim truth</text><rect x="928" y="1720" width="204" height="66" rx="12" fill="#f5f8fb"/><text x="1030" y="1750" class="small" text-anchor="middle">No LLM may be sole judge of a</text><text x="1030" y="1773" class="small" text-anchor="middle"> material finding</text>
+
+  <text x="48" y="1855" class="whiteSmall">Evidence first. Applicable jurisdiction, contract terms and remedy depend on the facts.</text>
+  <text x="1150" y="1855" class="whiteSmall" text-anchor="end">TokenVampire • 6 Oct 2026</text>
+</svg>

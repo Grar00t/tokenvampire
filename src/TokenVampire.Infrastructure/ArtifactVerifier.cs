@@ -108,6 +108,9 @@ static class SecureArtifactFile
 
     public static FileStream OpenRead(string path)
     {
+        if (Path.EndsInDirectorySeparator(path))
+            throw new IOException("artifact path ends with a directory separator");
+
         var fullPath = Path.GetFullPath(path);
         return OperatingSystem.IsWindows()
             ? OpenWindows(fullPath)
@@ -228,7 +231,11 @@ static class SecureArtifactFile
             {
                 var nextFd = openat(directoryFd, components[i], oDirectory | oNoFollow | oNonBlock);
                 if (nextFd < 0)
-                    ThrowUnixOpenError(Marshal.GetLastPInvokeError(), fullPath);
+                    ThrowUnixComponentOpenError(
+                        directoryFd,
+                        components[i],
+                        Marshal.GetLastPInvokeError(),
+                        fullPath);
 
                 close(directoryFd);
                 directoryFd = nextFd;
@@ -307,6 +314,32 @@ static class SecureArtifactFile
         throw new PlatformNotSupportedException("secure artifact verification supports Windows, Linux, and macOS");
     }
 
+    static void ThrowUnixComponentOpenError(
+        int directoryFd,
+        string component,
+        int error,
+        string path)
+    {
+        var eNotDir = OperatingSystem.IsMacOS() ? 20 : 20;
+        if (error == eNotDir && IsSymbolicLinkAt(directoryFd, component))
+            throw new ArtifactLinkException("artifact path contains a symbolic link");
+
+        ThrowUnixOpenError(error, path);
+    }
+
+    static bool IsSymbolicLinkAt(int directoryFd, string component)
+    {
+        var buffer = Marshal.AllocHGlobal(1);
+        try
+        {
+            return readlinkat(directoryFd, component, buffer, 1) >= 0;
+        }
+        finally
+        {
+            Marshal.FreeHGlobal(buffer);
+        }
+    }
+
     static void ThrowUnixOpenError(int error, string path)
     {
         var eLoop = OperatingSystem.IsMacOS() ? 62 : 40;
@@ -327,6 +360,9 @@ static class SecureArtifactFile
 
     [DllImport("libc", SetLastError = true)]
     static extern int close(int fd);
+
+    [DllImport("libc", SetLastError = true)]
+    static extern nint readlinkat(int directoryFd, string path, IntPtr buffer, nuint bufferSize);
 
     [DllImport("libc", SetLastError = true)]
     static extern int statx(int directoryFd, string path, int flags, uint mask, IntPtr buffer);

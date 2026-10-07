@@ -220,6 +220,22 @@
           "SQLitePCLRaw.bundle_e_sqlite3": "2.1.12",
           "SQLitePCLRaw.core": "2.1.12"
         }
+      },
+      "tokenvampire.cli": {
+        "type": "Project",
+        "dependencies": {
+          "TokenVampire.Application": "[1.0.0, )",
+          "TokenVampire.Infrastructure": "[1.0.0, )",
+          "TokenVampire.Presentation": "[1.0.0, )",
+          "TokenVampire.Reporting": "[1.0.0, )"
+        }
+      },
+      "tokenvampire.presentation": {
+        "type": "Project",
+        "dependencies": {
+          "TokenVampire.Application": "[1.0.0, )",
+          "TokenVampire.I18n": "[1.0.0, )"
+        }
       }
     }
   }

@@ -33,6 +33,12 @@ public sealed class Catalog
 
     public string Get(string key, string locale) => TryGet(key, locale, out var v) ? v : "!" + key + "!";
 
+    internal bool HasLocale(string locale)
+    {
+        var loc = Locale.Canonical(locale);
+        return _data.TryGetValue(loc, out var map) && map.Count != 0;
+    }
+
     public IReadOnlyList<string> MissingKeys(string locale)
     {
         var loc = Locale.Canonical(locale);

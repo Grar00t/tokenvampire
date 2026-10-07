@@ -64,6 +64,68 @@ public class ArtifactVerifierTests
         Assert.Equal(ArtifactVerificationStatus.InvalidExpectation, r.Status);
     }
 
+    [Fact]
+    public void Direct_symbolic_link_is_rejected()
+    {
+        var dir = Path.Combine(Path.GetTempPath(), "tokenvampire-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(dir);
+        var target = Path.Combine(dir, "target.bin");
+        var link = Path.Combine(dir, "link.bin");
+        File.WriteAllText(target, "abc");
+        try
+        {
+            File.CreateSymbolicLink(link, target);
+            var r = ArtifactVerifier.Verify(link);
+            Assert.Equal(ArtifactVerificationStatus.LinkRejected, r.Status);
+        }
+        catch (UnauthorizedAccessException) when (OperatingSystem.IsWindows())
+        {
+            return;
+        }
+        finally
+        {
+            if (File.Exists(link) || new FileInfo(link).LinkTarget is not null)
+                File.Delete(link);
+            Directory.Delete(dir, true);
+        }
+    }
+
+    [Fact]
+    public void Parent_symbolic_link_is_rejected()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "tokenvampire-" + Guid.NewGuid().ToString("N"));
+        var targetDir = Path.Combine(root, "target");
+        var linkDir = Path.Combine(root, "link");
+        Directory.CreateDirectory(targetDir);
+        File.WriteAllText(Path.Combine(targetDir, "artifact.bin"), "abc");
+        try
+        {
+            Directory.CreateSymbolicLink(linkDir, targetDir);
+            var r = ArtifactVerifier.Verify(Path.Combine(linkDir, "artifact.bin"));
+            Assert.Equal(ArtifactVerificationStatus.LinkRejected, r.Status);
+        }
+        catch (UnauthorizedAccessException) when (OperatingSystem.IsWindows())
+        {
+            return;
+        }
+        finally
+        {
+            if (Directory.Exists(linkDir) || new DirectoryInfo(linkDir).LinkTarget is not null)
+                Directory.Delete(linkDir);
+            Directory.Delete(root, true);
+        }
+    }
+
+    [Fact]
+    public void Unix_character_device_is_rejected_before_hashing()
+    {
+        if (OperatingSystem.IsWindows() || !File.Exists("/dev/zero"))
+            return;
+
+        var r = ArtifactVerifier.Verify("/dev/zero");
+        Assert.Equal(ArtifactVerificationStatus.Unreadable, r.Status);
+    }
+
     static void WithFile(string text, Action<string> test)
     {
         var dir = Path.Combine(Path.GetTempPath(), "tokenvampire-" + Guid.NewGuid().ToString("N"));

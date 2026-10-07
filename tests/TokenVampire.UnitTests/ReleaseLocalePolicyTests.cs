@@ -10,4 +10,19 @@ public class ReleaseLocalePolicyTests
     [Fact]
     public void Release_blocking_catalogs_are_complete() =>
         ReleaseLocalePolicy.Validate(Catalog.Builtin());
+
+    [Fact]
+    public void Empty_catalog_fails_release_gate() =>
+        Assert.Throws<InvalidOperationException>(() =>
+            ReleaseLocalePolicy.Validate(new Catalog()));
+
+    [Fact]
+    public void Missing_arabic_catalog_fails_release_gate()
+    {
+        var catalog = new Catalog();
+        catalog.Set("en", "report.title", "CASE REPORT");
+
+        Assert.Throws<InvalidOperationException>(() =>
+            ReleaseLocalePolicy.Validate(catalog));
+    }
 }

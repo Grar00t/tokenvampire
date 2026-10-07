@@ -44,7 +44,7 @@ public class ArtifactVerifierTests
     [Fact]
     public void Missing_file_is_not_reported_as_match()
     {
-        var path = Path.Combine(Path.GetTempPath(), "tokenvampire-" + Guid.NewGuid().ToString("N"), "missing.bin");
+        var path = Path.Combine(CanonicalTempRoot(), "tokenvampire-" + Guid.NewGuid().ToString("N"), "missing.bin");
         var r = ArtifactVerifier.Verify(path);
         Assert.Equal(ArtifactVerificationStatus.Missing, r.Status);
         Assert.False(r.Matched);
@@ -67,7 +67,7 @@ public class ArtifactVerifierTests
     [Fact]
     public void Direct_symbolic_link_is_rejected()
     {
-        var dir = Path.Combine(Path.GetTempPath(), "tokenvampire-" + Guid.NewGuid().ToString("N"));
+        var dir = Path.Combine(CanonicalTempRoot(), "tokenvampire-" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(dir);
         var target = Path.Combine(dir, "target.bin");
         var link = Path.Combine(dir, "link.bin");
@@ -93,7 +93,7 @@ public class ArtifactVerifierTests
     [Fact]
     public void Parent_symbolic_link_is_rejected()
     {
-        var root = Path.Combine(Path.GetTempPath(), "tokenvampire-" + Guid.NewGuid().ToString("N"));
+        var root = Path.Combine(CanonicalTempRoot(), "tokenvampire-" + Guid.NewGuid().ToString("N"));
         var targetDir = Path.Combine(root, "target");
         var linkDir = Path.Combine(root, "link");
         Directory.CreateDirectory(targetDir);
@@ -126,9 +126,37 @@ public class ArtifactVerifierTests
         Assert.Equal(ArtifactVerificationStatus.Unreadable, r.Status);
     }
 
+    [Fact]
+    public void Trailing_directory_separator_is_rejected()
+    {
+        var dir = Path.Combine(CanonicalTempRoot(), "tokenvampire-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(dir);
+        try
+        {
+            var path = Path.Combine(dir, "artifact.bin");
+            File.WriteAllText(path, "abc");
+            var r = ArtifactVerifier.Verify(path + Path.DirectorySeparatorChar);
+            Assert.Equal(ArtifactVerificationStatus.Unreadable, r.Status);
+        }
+        finally
+        {
+            Directory.Delete(dir, true);
+        }
+    }
+
+    static string CanonicalTempRoot()
+    {
+        var root = Path.GetFullPath(Path.GetTempPath());
+        if (OperatingSystem.IsMacOS() && root.StartsWith("/var/", StringComparison.Ordinal))
+            return "/private" + root;
+        if (OperatingSystem.IsMacOS() && string.Equals(root, "/var", StringComparison.Ordinal))
+            return "/private/var";
+        return root;
+    }
+
     static void WithFile(string text, Action<string> test)
     {
-        var dir = Path.Combine(Path.GetTempPath(), "tokenvampire-" + Guid.NewGuid().ToString("N"));
+        var dir = Path.Combine(CanonicalTempRoot(), "tokenvampire-" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(dir);
         var path = Path.Combine(dir, "artifact.bin");
         File.WriteAllBytes(path, Encoding.UTF8.GetBytes(text));

@@ -42,6 +42,30 @@ public class StorageTests
     }
 
     [Fact]
+    public async Task Vault_truncated_record_fails_closed()
+    {
+        var v = V(out var dir);
+        Directory.CreateDirectory(dir);
+        await File.WriteAllBytesAsync(
+            Path.Combine(dir, "e1.bin"),
+            new byte[27],
+            TestContext.Current.CancellationToken);
+
+        await Assert.ThrowsAsync<CryptographicException>(() =>
+            v.GetAsync("e1", TestContext.Current.CancellationToken));
+    }
+
+    [Fact]
+    public async Task Vault_write_leaves_no_temporary_file()
+    {
+        var v = V(out var dir);
+        await v.PutAsync("e1", [1, 2, 3], TestContext.Current.CancellationToken);
+
+        Assert.True(File.Exists(Path.Combine(dir, "e1.bin")));
+        Assert.Empty(Directory.EnumerateFiles(dir, "*.tmp"));
+    }
+
+    [Fact]
     public async Task Vault_wrong_key_fails()
     {
         var v1 = V(out var dir);

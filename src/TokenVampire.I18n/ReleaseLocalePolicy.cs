@@ -13,6 +13,12 @@ public static class ReleaseLocalePolicy
 
         foreach (var locale in Blocking)
         {
+            if (!catalog.HasLocale(locale))
+            {
+                throw new InvalidOperationException(
+                    $"Release-blocking locale '{locale}' has no catalog entries.");
+            }
+
             var missing = catalog.MissingKeys(locale);
             if (missing.Count != 0)
             {

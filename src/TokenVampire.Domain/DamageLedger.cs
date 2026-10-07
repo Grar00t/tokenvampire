@@ -1,12 +1,27 @@
 namespace TokenVampire.Domain;
 
-public sealed record DamageEntry(
-    string Id,
-    DamageLedgerKind Kind,
-    Measured<decimal> Amount,
-    string Currency,
-    IReadOnlyList<string> EvidenceIds)
+public sealed record DamageEntry
 {
+    private DamageEntry(
+        string id,
+        DamageLedgerKind kind,
+        Measured<decimal> amount,
+        string currency,
+        IReadOnlyList<string> evidenceIds)
+    {
+        Id = id;
+        Kind = kind;
+        Amount = amount;
+        Currency = currency;
+        EvidenceIds = evidenceIds;
+    }
+
+    public string Id { get; }
+    public DamageLedgerKind Kind { get; }
+    public Measured<decimal> Amount { get; }
+    public string Currency { get; }
+    public IReadOnlyList<string> EvidenceIds { get; }
+
     public static DamageEntry Create(
         string id,
         DamageLedgerKind kind,
@@ -35,7 +50,7 @@ public sealed record DamageEntry(
             throw new InvalidOperationException("A measured damage amount needs evidence.");
         }
 
-        return new(id, kind, amount, normalizedCurrency, ids);
+        return new(id, kind, amount, normalizedCurrency, Array.AsReadOnly(ids));
     }
 }
 
@@ -48,6 +63,12 @@ public sealed class DamageLedger
     public bool Add(DamageEntry entry)
     {
         ArgumentNullException.ThrowIfNull(entry);
+
+        if (entry.Amount.IsMeasured && entry.EvidenceIds.Count == 0)
+        {
+            throw new InvalidOperationException("A measured damage amount needs evidence.");
+        }
+
         return _entries.TryAdd(entry.Id, entry);
     }
 
@@ -58,7 +79,8 @@ public sealed class DamageLedger
             .Where(x => string.Equals(x.Currency, normalizedCurrency, StringComparison.Ordinal))
             .ToArray();
 
-        if (entries.Length == 0 || entries.Any(x => !x.Amount.IsMeasured))
+        if (entries.Length == 0 ||
+            entries.Any(x => !x.Amount.IsMeasured || x.EvidenceIds.Count == 0))
         {
             return Measured<Money>.Unknown;
         }

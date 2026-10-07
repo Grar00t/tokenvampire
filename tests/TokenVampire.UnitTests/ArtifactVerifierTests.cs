@@ -144,6 +144,19 @@ public class ArtifactVerifierTests
         }
     }
 
+    [Fact]
+    public void Linux_procfs_observed_bytes_are_bytes_actually_hashed()
+    {
+        if (!OperatingSystem.IsLinux() || !File.Exists("/proc/self/cmdline"))
+            return;
+
+        var r = ArtifactVerifier.Verify("/proc/self/cmdline");
+
+        Assert.Equal(ArtifactVerificationStatus.Match, r.Status);
+        Assert.True(r.ObservedBytes > 0);
+        Assert.False(string.IsNullOrWhiteSpace(r.ObservedSha256));
+    }
+
     static string CanonicalTempRoot()
     {
         var root = Path.GetFullPath(Path.GetTempPath());

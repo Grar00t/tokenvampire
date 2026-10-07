@@ -4,7 +4,7 @@ using TokenVampire.Reporting;
 
 if (args.Length == 0)
 {
-    WriteUsage();
+    WriteUsage(Console.Error);
     return 2;
 }
 
@@ -15,77 +15,87 @@ if (args[0] == "report")
 }
 
 if (args[0] == "verify-artifact")
-    return RunVerifyArtifact(args[1..]);
+    return VerifyArtifactCommand.Run(args[1..], Console.Out, Console.Error);
 
-WriteUsage();
+WriteUsage(Console.Error);
 return 2;
 
-static int RunVerifyArtifact(string[] commandArgs)
+static void WriteUsage(TextWriter stderr)
 {
-    string? path = null;
-    string? expectedSha256 = null;
-    long? expectedBytes = null;
+    stderr.WriteLine(ReportCommand.Usage);
+    stderr.WriteLine(VerifyArtifactCommand.Usage);
+}
 
-    for (var i = 0; i < commandArgs.Length; i += 2)
+public static class VerifyArtifactCommand
+{
+    public const string Usage =
+        "usage: verify-artifact --path <file> [--sha256 <64-hex>] [--bytes <non-negative-int>]";
+
+    public static int Run(string[] commandArgs, TextWriter stdout, TextWriter stderr)
     {
-        if (i + 1 >= commandArgs.Length)
+        ArgumentNullException.ThrowIfNull(commandArgs);
+        ArgumentNullException.ThrowIfNull(stdout);
+        ArgumentNullException.ThrowIfNull(stderr);
+
+        string? path = null;
+        string? expectedSha256 = null;
+        long? expectedBytes = null;
+
+        for (var i = 0; i < commandArgs.Length; i += 2)
         {
-            Console.Error.WriteLine("missing value for " + commandArgs[i]);
-            WriteUsage();
+            if (i + 1 >= commandArgs.Length)
+            {
+                stderr.WriteLine("missing value for " + commandArgs[i]);
+                stderr.WriteLine(Usage);
+                return 2;
+            }
+
+            var value = commandArgs[i + 1];
+            switch (commandArgs[i])
+            {
+                case "--path":
+                    path = value;
+                    break;
+                case "--sha256":
+                    expectedSha256 = value;
+                    break;
+                case "--bytes":
+                    if (!long.TryParse(value, NumberStyles.None, CultureInfo.InvariantCulture, out var parsed) || parsed < 0)
+                    {
+                        stderr.WriteLine("--bytes must be a non-negative integer");
+                        return 2;
+                    }
+                    expectedBytes = parsed;
+                    break;
+                default:
+                    stderr.WriteLine("unknown option " + commandArgs[i]);
+                    stderr.WriteLine(Usage);
+                    return 2;
+            }
+        }
+
+        if (string.IsNullOrWhiteSpace(path))
+        {
+            stderr.WriteLine("--path is required");
+            stderr.WriteLine(Usage);
             return 2;
         }
 
-        var value = commandArgs[i + 1];
-        switch (commandArgs[i])
+        var result = ArtifactVerifier.Verify(path, expectedSha256, expectedBytes);
+        stdout.WriteLine("status=" + result.Status.ToString().ToUpperInvariant());
+        stdout.WriteLine("path=" + result.Path);
+        if (result.ObservedBytes is not null)
+            stdout.WriteLine("bytes=" + result.ObservedBytes.Value.ToString(CultureInfo.InvariantCulture));
+        if (result.ObservedSha256 is not null)
+            stdout.WriteLine("sha256=" + result.ObservedSha256);
+        if (result.Message is not null)
+            stderr.WriteLine(result.Message);
+
+        return result.Status switch
         {
-            case "--path":
-                path = value;
-                break;
-            case "--sha256":
-                expectedSha256 = value;
-                break;
-            case "--bytes":
-                if (!long.TryParse(value, NumberStyles.None, CultureInfo.InvariantCulture, out var parsed) || parsed < 0)
-                {
-                    Console.Error.WriteLine("--bytes must be a non-negative integer");
-                    return 2;
-                }
-                expectedBytes = parsed;
-                break;
-            default:
-                Console.Error.WriteLine("unknown option " + commandArgs[i]);
-                WriteUsage();
-                return 2;
-        }
+            ArtifactVerificationStatus.Match => 0,
+            ArtifactVerificationStatus.InvalidExpectation => 2,
+            _ => 1,
+        };
     }
-
-    if (string.IsNullOrWhiteSpace(path))
-    {
-        Console.Error.WriteLine("--path is required");
-        WriteUsage();
-        return 2;
-    }
-
-    var result = ArtifactVerifier.Verify(path, expectedSha256, expectedBytes);
-    Console.Out.WriteLine("status=" + result.Status.ToString().ToUpperInvariant());
-    Console.Out.WriteLine("path=" + result.Path);
-    if (result.ObservedBytes is not null)
-        Console.Out.WriteLine("bytes=" + result.ObservedBytes.Value.ToString(CultureInfo.InvariantCulture));
-    if (result.ObservedSha256 is not null)
-        Console.Out.WriteLine("sha256=" + result.ObservedSha256);
-    if (result.Message is not null)
-        Console.Error.WriteLine(result.Message);
-
-    return result.Status switch
-    {
-        ArtifactVerificationStatus.Match => 0,
-        ArtifactVerificationStatus.InvalidExpectation => 2,
-        _ => 1,
-    };
-}
-
-static void WriteUsage()
-{
-    Console.Error.WriteLine(ReportCommand.Usage);
-    Console.Error.WriteLine("usage: verify-artifact --path <file> [--sha256 <64-hex>] [--bytes <non-negative-int>]");
 }

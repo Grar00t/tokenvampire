@@ -53,8 +53,7 @@ public static class ArtifactVerifier
         try
         {
             using var stream = SecureArtifactFile.OpenRead(path);
-            var observedBytes = stream.Length;
-            var observedHash = Convert.ToHexStringLower(SHA256.HashData(stream));
+            var (observedBytes, observedHash) = HashOpenedStream(stream);
 
             if (expectedBytes is not null && observedBytes != expectedBytes.Value)
                 return new(ArtifactVerificationStatus.SizeMismatch, path, observedBytes, observedHash,
@@ -82,6 +81,25 @@ public static class ArtifactVerifier
         {
             return new(ArtifactVerificationStatus.Unreadable, path, Message: e.Message);
         }
+    }
+
+    static (long Bytes, string Sha256) HashOpenedStream(Stream stream)
+    {
+        using var hash = IncrementalHash.CreateHash(HashAlgorithmName.SHA256);
+        var buffer = new byte[128 * 1024];
+        long bytes = 0;
+
+        while (true)
+        {
+            var read = stream.Read(buffer, 0, buffer.Length);
+            if (read == 0)
+                break;
+
+            bytes = checked(bytes + read);
+            hash.AppendData(buffer, 0, read);
+        }
+
+        return (bytes, Convert.ToHexStringLower(hash.GetHashAndReset()));
     }
 
     static ArtifactVerificationResult Invalid(string path, string message) =>
@@ -144,7 +162,9 @@ static class SecureArtifactFile
             if ((handleAttributes & (FileAttributes.Directory | FileAttributes.ReparsePoint)) != 0)
                 throw new ArtifactLinkException("symbolic links, reparse points, and directories are not accepted as direct artifact evidence");
 
-            var resolved = GetWindowsHandlePath(handle);
+            var useVolumeGuid =
+                fullPath.StartsWith(@"\\?\Volume{", StringComparison.OrdinalIgnoreCase);
+            var resolved = GetWindowsHandlePath(handle, useVolumeGuid);
             if (!PathEqualsWindows(fullPath, resolved))
                 throw new ArtifactLinkException("artifact path resolved through a reparse point");
 
@@ -177,18 +197,19 @@ static class SecureArtifactFile
         }
     }
 
-    static string GetWindowsHandlePath(SafeFileHandle handle)
+    static string GetWindowsHandlePath(SafeFileHandle handle, bool useVolumeGuid)
     {
         var capacity = 512;
+        var flags = useVolumeGuid ? 0x1u : 0u;
         while (true)
         {
             var buffer = new StringBuilder(capacity);
-            var length = GetFinalPathNameByHandle(handle, buffer, (uint)buffer.Capacity, 0);
+            var length = GetFinalPathNameByHandle(handle, buffer, (uint)buffer.Capacity, flags);
             if (length == 0)
                 throw new Win32Exception(Marshal.GetLastPInvokeError());
 
             if (length < buffer.Capacity)
-                return NormalizeWindowsHandlePath(buffer.ToString());
+                return buffer.ToString();
 
             capacity = checked((int)length + 1);
         }
@@ -207,9 +228,18 @@ static class SecureArtifactFile
 
     static bool PathEqualsWindows(string expected, string observed) =>
         string.Equals(
-            Path.TrimEndingDirectorySeparator(Path.GetFullPath(expected)),
-            Path.TrimEndingDirectorySeparator(Path.GetFullPath(observed)),
+            CanonicalWindowsPath(expected),
+            CanonicalWindowsPath(observed),
             StringComparison.OrdinalIgnoreCase);
+
+    static string CanonicalWindowsPath(string path)
+    {
+        var normalized = path.StartsWith(@"\\?\Volume{", StringComparison.OrdinalIgnoreCase)
+            ? path
+            : NormalizeWindowsHandlePath(path);
+
+        return Path.TrimEndingDirectorySeparator(Path.GetFullPath(normalized));
+    }
 
     static FileStream OpenUnix(string fullPath)
     {
@@ -299,7 +329,10 @@ static class SecureArtifactFile
                 for (var i = 0; i < 144; i++)
                     Marshal.WriteByte(buffer, i, 0);
 
-                if (fstat(fd, buffer) != 0)
+                var status = RuntimeInformation.ProcessArchitecture == Architecture.X64
+                    ? fstat_inode64(fd, buffer)
+                    : fstat(fd, buffer);
+                if (status != 0)
                     throw new Win32Exception(Marshal.GetLastPInvokeError());
 
                 var mode = unchecked((ushort)Marshal.ReadInt16(buffer, 4));
@@ -369,6 +402,9 @@ static class SecureArtifactFile
 
     [DllImport("libc", SetLastError = true)]
     static extern int fstat(int fd, IntPtr buffer);
+
+    [DllImport("libc", EntryPoint = "fstat$INODE64", SetLastError = true)]
+    static extern int fstat_inode64(int fd, IntPtr buffer);
 
     [DllImport("kernel32.dll", SetLastError = true)]
     static extern uint GetFileType(SafeFileHandle handle);

@@ -18,17 +18,35 @@ public sealed class Vault(string directory, byte[] key)
         Directory.CreateDirectory(directory);
 
         var destination = PathFor(id);
-        var temporary = destination + "." + Guid.NewGuid().ToString("N") + ".tmp";
+        var temporary = Path.Combine(
+            directory,
+            ".tokenvampire-" + Guid.NewGuid().ToString("N") + ".tmp");
 
         var nonce = RandomNumberGenerator.GetBytes(NonceSize);
         var cipher = new byte[plain.Length];
         var tag = new byte[TagSize];
         using var aes = new AesGcm(key, TagSize);
         aes.Encrypt(nonce, plain, cipher, tag, Encoding(id));
+        var record = new byte[HeaderSize + cipher.Length];
+        nonce.CopyTo(record, 0);
+        tag.CopyTo(record, NonceSize);
+        cipher.CopyTo(record, HeaderSize);
 
         try
         {
-            await File.WriteAllBytesAsync(temporary, [.. nonce, .. tag, .. cipher], ct);
+            await using (var stream = new FileStream(
+                temporary,
+                FileMode.CreateNew,
+                FileAccess.Write,
+                FileShare.None,
+                bufferSize: 4096,
+                options: FileOptions.Asynchronous))
+            {
+                await stream.WriteAsync(record, ct);
+                await stream.FlushAsync(ct);
+                stream.Flush(flushToDisk: true);
+            }
+
             File.Move(temporary, destination, true);
         }
         finally

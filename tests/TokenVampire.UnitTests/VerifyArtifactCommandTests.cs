@@ -74,9 +74,19 @@ public class VerifyArtifactCommandTests
         Assert.Contains(VerifyArtifactCommand.Usage, stderr.ToString());
     }
 
+    static string CanonicalTempRoot()
+    {
+        var root = Path.GetFullPath(Path.GetTempPath());
+        if (OperatingSystem.IsMacOS() && root.StartsWith("/var/", StringComparison.Ordinal))
+            return "/private" + root;
+        if (OperatingSystem.IsMacOS() && string.Equals(root, "/var", StringComparison.Ordinal))
+            return "/private/var";
+        return root;
+    }
+
     static void WithFile(string text, Action<string> test)
     {
-        var dir = Path.Combine(Path.GetTempPath(), "tokenvampire-cli-" + Guid.NewGuid().ToString("N"));
+        var dir = Path.Combine(CanonicalTempRoot(), "tokenvampire-cli-" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(dir);
         var path = Path.Combine(dir, "artifact.bin");
         File.WriteAllBytes(path, Encoding.UTF8.GetBytes(text));

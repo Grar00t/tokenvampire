@@ -26,6 +26,20 @@ public class CanonicalTruthModelTests
                 []));
 
     [Fact]
+    public void Damage_entry_has_no_public_constructor_or_mutable_properties()
+    {
+        Assert.Empty(typeof(DamageEntry).GetConstructors());
+
+        var writable = typeof(DamageEntry)
+            .GetProperties()
+            .Where(x => x.SetMethod?.IsPublic == true)
+            .Select(x => x.Name)
+            .ToArray();
+
+        Assert.Empty(writable);
+    }
+
+    [Fact]
     public void Empty_damage_ledger_has_no_verified_total()
     {
         var total = new DamageLedger().VerifiedTotal("USD");

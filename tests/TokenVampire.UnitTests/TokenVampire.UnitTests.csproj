@@ -12,5 +12,7 @@
  <ItemGroup>
   <EmbeddedResource Include="../../cases/notion-desktop-2026-08/dossier.json"
                     LogicalName="TokenVampire.Notion202608" />
+  <EmbeddedResource Include="../../cases/oauth-metadata-telemetry-2026-10-10/dossier.json"
+                    LogicalName="TokenVampire.UnattributedOAuth20261010" />
  </ItemGroup>
 </Project>

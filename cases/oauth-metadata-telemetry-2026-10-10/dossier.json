@@ -1,0 +1,164 @@
+{
+  "schemaVersion": 1,
+  "caseId": "oauth-metadata-telemetry-2026-10-10",
+  "vendor": "Unattributed",
+  "product": "OAuth metadata, local telemetry and RAG inference claims",
+  "periodStart": "2026-10-10",
+  "periodEnd": "2026-10-10",
+  "publication": "redactedSummary",
+  "sources": [
+    {
+      "id": "USER-REPORT-20261010",
+      "description": "Reporter-supplied message with a credential-shaped string, untested attack allegation, event count and formula. Secret value intentionally excluded.",
+      "access": "reporterSuppliedSummary",
+      "sha256": null
+    }
+  ],
+  "incidents": [
+    {
+      "id": "U-INC-01",
+      "date": "2026-10-10",
+      "product": "Unattributed OAuth infrastructure",
+      "failureClass": "Reporter claims an active privileged OAuth token was obtained by metadata-service SSRF; origin and privileges unverified.",
+      "role": "reportedFailure",
+      "provenance": "userAsserted",
+      "sourceIds": [
+        "USER-REPORT-20261010"
+      ]
+    },
+    {
+      "id": "U-INC-02",
+      "date": "2026-10-10",
+      "product": "Unattributed application telemetry",
+      "failureClass": "Reporter claims more than 87000 local events are evidence of deterministic data exfiltration; network transfer unverified.",
+      "role": "reportedFailure",
+      "provenance": "userAsserted",
+      "sourceIds": [
+        "USER-REPORT-20261010"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": "U-OAUTH-01",
+      "category": "oAuth",
+      "statement": "Reporter supplied a credential-shaped value with a ya29-style OAuth token prefix. The original bytes are not recorded here.",
+      "provenance": "userAsserted",
+      "sourceIds": [
+        "USER-REPORT-20261010"
+      ],
+      "verificationNeeded": "Determine account ownership and token handling from authorized provider records after revocation; do not validate or replay the exposed credential."
+    },
+    {
+      "id": "U-OAUTH-02",
+      "category": "security",
+      "statement": "The reporter attributes the string to an active administrative session obtained through server-side request forgery against a metadata service.",
+      "provenance": "userAsserted",
+      "sourceIds": [
+        "USER-REPORT-20261010"
+      ],
+      "verificationNeeded": "Require a redacted authorized HTTP transaction trace, exact request origin, metadata provider identification, server policy and provenance-preserving timestamps."
+    },
+    {
+      "id": "U-OAUTH-03",
+      "category": "security",
+      "statement": "Token validity, principal, privilege level, target service, SSRF execution and actual unauthorized access are not established.",
+      "provenance": "unknown",
+      "sourceIds": [
+        "USER-REPORT-20261010"
+      ],
+      "verificationNeeded": "Obtain independently reviewed identity and server audit records without sharing secrets or invoking a live token."
+    },
+    {
+      "id": "U-TEL-01",
+      "category": "telemetry",
+      "statement": "Reporter asserts a count greater than 87000 events in an application state.json file; no underlying file, capture or event schema was supplied.",
+      "provenance": "userAsserted",
+      "sourceIds": [
+        "USER-REPORT-20261010"
+      ],
+      "verificationNeeded": "Preserve a redacted file hash and schema, distinguish configuration/state entries from timestamped event records and count the exact relevant event type."
+    },
+    {
+      "id": "U-TEL-02",
+      "category": "telemetry",
+      "statement": "Reporter describes an eBPF telemetry proof and deterministic exfiltration but has not supplied eBPF attachment points, program IDs, event records or matching network flow logs.",
+      "provenance": "userAsserted",
+      "sourceIds": [
+        "USER-REPORT-20261010"
+      ],
+      "verificationNeeded": "Require an authorized eBPF capture with provenance, collection duration, attach point, relevant PID, destination and independent egress confirmation."
+    },
+    {
+      "id": "U-TEL-03",
+      "category": "security",
+      "statement": "Neither the claimed event count nor a state.json file alone demonstrates personal-data transfer, external exfiltration or determinism.",
+      "provenance": "unknown",
+      "sourceIds": [
+        "USER-REPORT-20261010"
+      ],
+      "verificationNeeded": "Correlate timestamped outbound flows, destinations, payload classes, account authorization, and event meaning with independent sources."
+    },
+    {
+      "id": "U-RAG-01",
+      "category": "causalHypothesis",
+      "statement": "Reporter offers a softmax-like score ratio tending to zero as a purported proof of attention decay during RAG context saturation.",
+      "provenance": "userAsserted",
+      "sourceIds": [
+        "USER-REPORT-20261010"
+      ],
+      "verificationNeeded": "Define all probability terms, context-length dependence, score distributions and summation ranges before interpreting the proposed limit."
+    },
+    {
+      "id": "U-RAG-02",
+      "category": "retrieval",
+      "statement": "The claimed zero limit and causal explanation are not mathematically or empirically established without assumptions about relative score mass as context grows.",
+      "provenance": "unknown",
+      "sourceIds": [
+        "USER-REPORT-20261010"
+      ],
+      "verificationNeeded": "Run controlled offline retrieval experiments with fixed queries, ground-truth passages, context lengths, token budgets and pre-registered accuracy metrics."
+    },
+    {
+      "id": "U-ATTR-01",
+      "category": "security",
+      "statement": "The report does not identify a request hostname or affected account. Prior discussion of another provider does not bind this incident to that company.",
+      "provenance": "unknown",
+      "sourceIds": [
+        "USER-REPORT-20261010"
+      ],
+      "verificationNeeded": "Establish exact origin from sanitized request headers and provider-controlled logs; do not infer attribution from a token prefix."
+    }
+  ],
+  "demands": [
+    {
+      "id": "U-REQ-01",
+      "request": "If authorized, promptly notify the credential owner or provider and seek session revocation or rotation through an approved process; do not reuse the pasted token.",
+      "incidentIds": [
+        "U-INC-01"
+      ]
+    },
+    {
+      "id": "U-REQ-02",
+      "request": "Request independent redacted evidence of any SSRF chain and of token scope, without live credential replay.",
+      "incidentIds": [
+        "U-INC-01"
+      ]
+    },
+    {
+      "id": "U-REQ-03",
+      "request": "Require eBPF and network evidence with explicit collection provenance before accepting any exfiltration conclusion.",
+      "incidentIds": [
+        "U-INC-02"
+      ]
+    },
+    {
+      "id": "U-REQ-04",
+      "request": "Separate local event count, verified outbound transfer and theoretical RAG behavior in any external incident report.",
+      "incidentIds": [
+        "U-INC-02"
+      ]
+    }
+  ],
+  "requestedResolutions": []
+}

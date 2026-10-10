@@ -67,8 +67,19 @@ public sealed class AuditHardeningTests
     public void Verified_observation_requires_reference()
     {
         var found = AuditObservation.Create("a", AuditControl.DeliveryTruth, "matched SHA-256",
-            AuditResult.Supported, EvidenceValue.Verified, ["e1", "e1"]);
+            AuditResult.Supported, EvidenceValue.Verified, ["e1", "e1"], id => id == "e1");
         Assert.Single(found.EvidenceIds);
+    }
+
+    [Fact]
+    public void Evidence_identifier_without_inspection_cannot_verify_claim()
+    {
+        Assert.Throws<InvalidOperationException>(() =>
+            AuditObservation.Create("a", AuditControl.DeliveryTruth, "delivered",
+                AuditResult.Supported, EvidenceValue.Verified, ["e1"]));
+        Assert.Throws<InvalidOperationException>(() =>
+            AuditObservation.Create("a", AuditControl.DeliveryTruth, "delivered",
+                AuditResult.Supported, EvidenceValue.Verified, ["e1"], _ => false));
     }
 
     [Fact]

@@ -167,7 +167,33 @@ public static class AuditDossierCodec
 
     private static bool PublicText(string? value, int maxLength = 500) =>
         value is not null && !string.IsNullOrWhiteSpace(value) && value.Length <= maxLength &&
-        !value.Any(c => char.IsControl(c) || c is '\u202a' or '\u202b' or '\u202d' or '\u202e' or '\u202c');
+        !value.Any(c => char.IsControl(c) || c is '\u202a' or '\u202b' or '\u202d' or '\u202e' or '\u202c') &&
+        !ContainsCredentialLikeMaterial(value);
+
+    // Conservative additional redaction gate. No heuristic can certify a string as secret-free.
+    private static bool ContainsCredentialLikeMaterial(string value)
+    {
+        if (value.Contains("Bearer ", StringComparison.OrdinalIgnoreCase) ||
+            value.Contains("Authorization:", StringComparison.OrdinalIgnoreCase) ||
+            value.Contains("client_secret=", StringComparison.OrdinalIgnoreCase) ||
+            value.Contains("-----BEGIN ", StringComparison.OrdinalIgnoreCase))
+            return true;
+
+        var sequenceLength = 0;
+        foreach (var character in value)
+        {
+            if (char.IsAsciiLetterOrDigit(character) || character is '+' or '/' or '=' or '_' or '-')
+            {
+                sequenceLength++;
+                if (sequenceLength >= 43) return true;
+            }
+            else
+            {
+                sequenceLength = 0;
+            }
+        }
+        return false;
+    }
 
     private static bool Sha256(string value) =>
         value.Length == 64 && value.All(Uri.IsHexDigit);

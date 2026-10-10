@@ -11,7 +11,7 @@ public enum DossierPublication { Unknown = 0, RedactedSummary, RestrictedEvidenc
 public enum DossierSourceAccess { Unknown = 0, ReporterSuppliedSummary, PrivateArchiveNotBundled, PublicRedactedArtifact }
 public enum DossierProvenance { Unknown = 0, UserAsserted, SourceObserved, Verified }
 public enum DossierIncidentRole { Unknown = 0, ReportedFailure, PositiveCounterexample }
-public enum DossierFindingCategory { Unknown = 0, Telemetry, Dependency, OAuth, Runtime, CausalHypothesis }
+public enum DossierFindingCategory { Unknown = 0, Telemetry, Dependency, OAuth, Runtime, CausalHypothesis, Security, Retrieval }
 
 public sealed record DossierSource(string Id, string Description, DossierSourceAccess Access, string? Sha256);
 public sealed record DossierIncident(string Id, DateOnly Date, string Product, string FailureClass,

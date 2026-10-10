@@ -141,6 +141,21 @@ The repository includes a dated public-source case study for **Anthropic / Claud
 | **ScenarioOnly** | A sensitivity or what-if model, not a measured loss or event. |
 | **Unknown** | Required data is absent, inaccessible, or insufficient to establish the value. |
 
+### OAuth / metadata-service and telemetry claims — redacted case (October 2026)
+
+A vendor-**unattributed** report describes an exposed OAuth-shaped credential, a
+claimed SSRF chain, a claim of more than 87,000 local telemetry events, and a
+proposed RAG attention-decay equation. **No token is included.** The report
+contains no independent source evidence of token validity or privileges,
+exploitation, network exfiltration, eBPF capture, or a mathematical proof.
+
+- [Redacted case and limitations](cases/oauth-metadata-telemetry-2026-10-10/README.md)
+- [Structured evidence-state record](cases/oauth-metadata-telemetry-2026-10-10/dossier.json)
+- Local validation: `dotnet run --project src/TokenVampire.Cli -- audit-case --input cases/oauth-metadata-telemetry-2026-10-10/dossier.json`
+
+The user-supplied bearer string is treated as sensitive and **is never published**.
+No provider is accused or assigned this unverified report by inference.
+
 ### Notion Desktop / Notion AI — redacted user report (August 2026)
 
 A separate, **reporter-supplied redacted case** records four Notion AI interactions (including one positive counterexample), local telemetry and OAuth storage observations, seven requested product remedies, and two proposed consumer resolutions. These are **UserAsserted / Unknown**, not independently verified findings. The separate Notion forensic working archive remains private and is **not cleared for public distribution**; no database, keys, tokens, proprietary binaries, or extracted webpack content have been copied here.

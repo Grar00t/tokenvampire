@@ -15,7 +15,7 @@ public sealed record AuditObservation(
 {
     public static AuditObservation Create(
         string id, AuditControl control, string claim, AuditResult result,
-        EvidenceValue evidenceState, IEnumerable<string> evidenceIds)
+        EvidenceValue evidenceState, IEnumerable<string> evidenceIds, Func<string, bool>? inspectSource = null)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(id);
         ArgumentException.ThrowIfNullOrWhiteSpace(claim);
@@ -24,8 +24,9 @@ public sealed record AuditObservation(
         var ids = evidenceIds.Select(x => string.IsNullOrWhiteSpace(x) ? throw new ArgumentException("Blank evidence id.") : x)
             .Distinct(StringComparer.Ordinal).OrderBy(x => x, StringComparer.Ordinal).ToArray();
         if (result != AuditResult.Unknown &&
-            (evidenceState != EvidenceValue.Verified || ids.Length == 0))
-            throw new InvalidOperationException("A supported/contradicted finding requires verified evidence references.");
+            (evidenceState != EvidenceValue.Verified || ids.Length == 0 || inspectSource is null ||
+             !ids.All(inspectSource)))
+            throw new InvalidOperationException("A supported/contradicted finding requires independently inspected source artifacts.");
         return new(id, control, claim, result, evidenceState, Array.AsReadOnly(ids));
     }
 }

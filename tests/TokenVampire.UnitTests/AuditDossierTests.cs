@@ -32,7 +32,7 @@ public sealed class AuditDossierTests
         Assert.Equal(2, dossier.RequestedResolutions.Length);
         Assert.Equal(9, dossier.Findings.Length);
         Assert.Equal(DossierIncidentRole.PositiveCounterexample, Assert.Single(
-            dossier.Incidents.Where(i => i.Id == "N-INC-04")).Role);
+            dossier.Incidents, i => i.Id == "N-INC-04").Role);
         Assert.All(dossier.Incidents, i => Assert.Equal(DossierProvenance.UserAsserted, i.Provenance));
     }
 
@@ -40,10 +40,10 @@ public sealed class AuditDossierTests
     public void OAuth_credential_exposure_and_common_causality_are_unknown()
     {
         Assert.True(AuditDossierCodec.TryRead(NotionCase(), out var dossier, out _));
-        Assert.Equal(DossierProvenance.Unknown, Assert.Single(dossier!.Findings.Where(
-            f => f.Id == "N-OAUTH-03")).Provenance);
-        Assert.Equal(DossierProvenance.Unknown, Assert.Single(dossier.Findings.Where(
-            f => f.Id == "N-HYP-01")).Provenance);
+        Assert.Equal(DossierProvenance.Unknown, Assert.Single(dossier!.Findings,
+            f => f.Id == "N-OAUTH-03").Provenance);
+        Assert.Equal(DossierProvenance.Unknown, Assert.Single(dossier.Findings,
+            f => f.Id == "N-HYP-01").Provenance);
         Assert.DoesNotContain(dossier.Findings, f => f.Provenance == DossierProvenance.Verified);
     }
 

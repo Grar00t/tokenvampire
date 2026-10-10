@@ -128,7 +128,7 @@ Naming a provider identifies the subject of a record. It does not change the evi
 
 ## Public Evidence Record
 
-The repository currently includes a dated public-source case study for **Anthropic / Claude**. Other providers are in scope for the same methodology, but a provider is not assigned findings merely because it appears in the vendor list.
+The repository includes a dated public-source case study for **Anthropic / Claude** and a separate redacted **Notion Desktop / Notion AI** user-submitted dossier. The same methodology applies to each, but a provider is not assigned verified findings merely because it appears in a case index.
 
 ### Evidence classes
 
@@ -140,6 +140,16 @@ The repository currently includes a dated public-source case study for **Anthrop
 | **Estimated** | Derived from an explicit calculation using stated assumptions. |
 | **ScenarioOnly** | A sensitivity or what-if model, not a measured loss or event. |
 | **Unknown** | Required data is absent, inaccessible, or insufficient to establish the value. |
+
+### Notion Desktop / Notion AI — redacted user report (August 2026)
+
+A separate, **reporter-supplied redacted case** records four Notion AI interactions (including one positive counterexample), local telemetry and OAuth storage observations, seven requested product remedies, and two proposed consumer resolutions. These are **UserAsserted / Unknown**, not independently verified findings. The separate Notion forensic working archive remains private and is **not cleared for public distribution**; no database, keys, tokens, proprietary binaries, or extracted webpack content have been copied here.
+
+- [Read the redacted Notion case and evidence limits](cases/notion-desktop-2026-08/README.md)
+- [Inspect the machine-readable dossier](cases/notion-desktop-2026-08/dossier.json)
+- Local validation: `dotnet run --project src/TokenVampire.Cli -- audit-case --input cases/notion-desktop-2026-08/dossier.json`
+
+This dossier is not a judgment that Notion violated privacy, consumer, or security law. Its original support record remains private.
 
 ### Anthropic / Claude — dated public record
 

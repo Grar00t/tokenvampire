@@ -1,0 +1,223 @@
+{
+  "schemaVersion": 1,
+  "caseId": "notion-desktop-2026-08",
+  "vendor": "Notion",
+  "product": "Notion Desktop and Notion AI",
+  "periodStart": "2026-08-24",
+  "periodEnd": "2026-08-26",
+  "publication": "redactedSummary",
+  "sources": [
+    {
+      "id": "REPORT-20260826",
+      "description": "Reporting user's supplied redacted incident narrative; claims not independently reproduced in this public package.",
+      "access": "reporterSuppliedSummary",
+      "sha256": null
+    },
+    {
+      "id": "PRIVATE-ARCHIVE",
+      "description": "Separate restricted working archive; not cleared for public distribution and not copied into this repository.",
+      "access": "privateArchiveNotBundled",
+      "sha256": null
+    }
+  ],
+  "incidents": [
+    {
+      "id": "N-INC-01",
+      "date": "2026-08-24",
+      "product": "Notion AI workspace",
+      "failureClass": "Inconsistent safety assessment across sessions, as reported.",
+      "role": "reportedFailure",
+      "provenance": "userAsserted",
+      "sourceIds": [
+        "REPORT-20260826"
+      ]
+    },
+    {
+      "id": "N-INC-02",
+      "date": "2026-08-25",
+      "product": "Docs Assistant on developers.notion.com",
+      "failureClass": "Retrieved tool output was reportedly attributed to the user.",
+      "role": "reportedFailure",
+      "provenance": "userAsserted",
+      "sourceIds": [
+        "REPORT-20260826"
+      ]
+    },
+    {
+      "id": "N-INC-03",
+      "date": "2026-08-25",
+      "product": "Notion AI inferred memory",
+      "failureClass": "Incorrect behavioral inference reportedly inserted into context as fact.",
+      "role": "reportedFailure",
+      "provenance": "userAsserted",
+      "sourceIds": [
+        "REPORT-20260826"
+      ]
+    },
+    {
+      "id": "N-INC-04",
+      "date": "2026-08-26",
+      "product": "Notion AI site analysis",
+      "failureClass": "Reported correct handling of obfuscated prompt injection; positive counterexample.",
+      "role": "positiveCounterexample",
+      "provenance": "userAsserted",
+      "sourceIds": [
+        "REPORT-20260826"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": "N-TEL-01",
+      "category": "telemetry",
+      "statement": "Reporter recorded a Splunk HEC ingestion endpoint, a local queue, and a successful upload at 20:27 local time on 25 August 2026.",
+      "provenance": "userAsserted",
+      "sourceIds": [
+        "REPORT-20260826"
+      ],
+      "verificationNeeded": "Independently inspect time-scoped endpoint configuration and redacted queue/send receipts; do not disclose HEC authentication."
+    },
+    {
+      "id": "N-TEL-02",
+      "category": "telemetry",
+      "statement": "Reporter observed HEC and Google geolocation API credentials in local client configuration; no credential values are reproduced.",
+      "provenance": "userAsserted",
+      "sourceIds": [
+        "REPORT-20260826"
+      ],
+      "verificationNeeded": "Inspect safely redacted configuration and determine credential scope, rotation and intended public-client exposure."
+    },
+    {
+      "id": "N-DEP-01",
+      "category": "dependency",
+      "statement": "Reported package metadata lists Sentry Electron 7.11.0, electron-log 4.4.8, electron-updater 6.8.9, better-sqlite3 13.0.1, uuid 8.3.2, HTTP and WebSocket clients, and an internal AI integration.",
+      "provenance": "userAsserted",
+      "sourceIds": [
+        "REPORT-20260826"
+      ],
+      "verificationNeeded": "Match dependency declarations to the captured package manifest; presence does not prove execution."
+    },
+    {
+      "id": "N-OAUTH-01",
+      "category": "oAuth",
+      "statement": "Reporter states that notion.db opens as ordinary SQLite and includes a microsoft_oauth table associated with the reporting account.",
+      "provenance": "userAsserted",
+      "sourceIds": [
+        "REPORT-20260826"
+      ],
+      "verificationNeeded": "Inspect only schema and counts with account IDs and sensitive values withheld; independently confirm storage protections."
+    },
+    {
+      "id": "N-OAUTH-02",
+      "category": "oAuth",
+      "statement": "Reporter observed a repeated 43-character Base64 value that decodes to approximately 32 bytes with a leading zero byte; the value itself is withheld.",
+      "provenance": "userAsserted",
+      "sourceIds": [
+        "REPORT-20260826"
+      ],
+      "verificationNeeded": "Trace producer, column semantics, cryptographic APIs and safe test fixtures rather than guessing from appearance."
+    },
+    {
+      "id": "N-OAUTH-03",
+      "category": "oAuth",
+      "statement": "Whether the opaque value is ciphertext, a key, a token, or non-sensitive metadata; credential exposure and key-management adequacy are not established.",
+      "provenance": "unknown",
+      "sourceIds": [
+        "REPORT-20260826"
+      ],
+      "verificationNeeded": "Establish column semantics and whether application-controlled data can be decrypted or replayed using authorized non-production material."
+    },
+    {
+      "id": "N-RUN-01",
+      "category": "runtime",
+      "statement": "Captured environment reportedly used Notion Desktop 7.31.2, Electron 42.4.1, Chromium 148.0.7778.265 and a Notion-signed executable.",
+      "provenance": "userAsserted",
+      "sourceIds": [
+        "REPORT-20260826"
+      ],
+      "verificationNeeded": "Check version manifests and Authenticode signature from the dated local capture; do not generalize to current releases."
+    },
+    {
+      "id": "N-RUN-02",
+      "category": "runtime",
+      "statement": "Reporter recorded a 20.2 MB notion.db with 49 tables and 11 indexes, approximately 2.17 GB local app data, and an open-at-login registry entry.",
+      "provenance": "userAsserted",
+      "sourceIds": [
+        "REPORT-20260826"
+      ],
+      "verificationNeeded": "Reproduce file-system, SQLite metadata and registry observations on the original captured environment only."
+    },
+    {
+      "id": "N-HYP-01",
+      "category": "causalHypothesis",
+      "statement": "A single origin/context ambiguity mechanism caused all incidents; this causal link has not been established.",
+      "provenance": "unknown",
+      "sourceIds": [
+        "REPORT-20260826"
+      ],
+      "verificationNeeded": "Conduct controlled origin-tagging and cross-session experiments; include the positive counterexample in evaluation."
+    }
+  ],
+  "demands": [
+    {
+      "id": "N-D-01",
+      "request": "Structurally tag retrieved content separately from user-authored messages.",
+      "incidentIds": [
+        "N-INC-02"
+      ]
+    },
+    {
+      "id": "N-D-02",
+      "request": "Avoid unsupported intent attribution; state only that instructions embedded in content were ignored.",
+      "incidentIds": [
+        "N-INC-01",
+        "N-INC-02"
+      ]
+    },
+    {
+      "id": "N-D-03",
+      "request": "Provide an appeal/correction path when a user disputes an attribution.",
+      "incidentIds": [
+        "N-INC-02"
+      ]
+    },
+    {
+      "id": "N-D-04",
+      "request": "Improve cross-session consistency in safety assessments and provide an appeal path.",
+      "incidentIds": [
+        "N-INC-01"
+      ]
+    },
+    {
+      "id": "N-D-05",
+      "request": "Expose inferred memory with correction and deletion controls.",
+      "incidentIds": [
+        "N-INC-03"
+      ]
+    },
+    {
+      "id": "N-D-06",
+      "request": "Mark behavioral inference explicitly as inference when included in context.",
+      "incidentIds": [
+        "N-INC-03"
+      ]
+    },
+    {
+      "id": "N-D-07",
+      "request": "Minimize behavioral context that is not required for the current task.",
+      "incidentIds": [
+        "N-INC-03"
+      ]
+    }
+  ],
+  "requestedResolutions": [
+    {
+      "id": "N-R-01",
+      "request": "Reporter requests full subscription-fee refund and a written acknowledgement/apology."
+    },
+    {
+      "id": "N-R-02",
+      "request": "Alternative requested outcome: full-access upgrade for the remaining subscription term at no additional charge."
+    }
+  ]
+}

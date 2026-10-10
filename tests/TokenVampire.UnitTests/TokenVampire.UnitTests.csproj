@@ -1,7 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
  <PropertyGroup><OutputType>Exe</OutputType><IsPackable>false</IsPackable></PropertyGroup>
+ <ItemGroup><PackageReference Include="xunit.v3" /></ItemGroup>
  <ItemGroup>
-  <PackageReference Include="xunit.v3" />
+  <ProjectReference Include="../../src/TokenVampire.Domain/TokenVampire.Domain.csproj" />
+  <ProjectReference Include="../../src/TokenVampire.Infrastructure/TokenVampire.Infrastructure.csproj" />
+  <ProjectReference Include="../../src/TokenVampire.Billing/TokenVampire.Billing.csproj" />
+  <ProjectReference Include="../../src/TokenVampire.Evidence/TokenVampire.Evidence.csproj" />
+  <ProjectReference Include="../../src/TokenVampire.Reporting/TokenVampire.Reporting.csproj" />
+  <ProjectReference Include="../../src/TokenVampire.I18n/TokenVampire.I18n.csproj" />
  </ItemGroup>
- <ItemGroup><ProjectReference Include="../../src/TokenVampire.Domain/TokenVampire.Domain.csproj" /><ProjectReference Include="../../src/TokenVampire.Infrastructure/TokenVampire.Infrastructure.csproj" /><ProjectReference Include="../../src/TokenVampire.Billing/TokenVampire.Billing.csproj" /><ProjectReference Include="../../src/TokenVampire.Evidence/TokenVampire.Evidence.csproj" /><ProjectReference Include="..\..\src\TokenVampire.Reporting\TokenVampire.Reporting.csproj" /><ProjectReference Include="..\..\src\TokenVampire.I18n\TokenVampire.I18n.csproj" /></ItemGroup>
+ <ItemGroup>
+  <EmbeddedResource Include="../../cases/notion-desktop-2026-08/dossier.json"
+                    LogicalName="TokenVampire.Notion202608" />
+ </ItemGroup>
 </Project>

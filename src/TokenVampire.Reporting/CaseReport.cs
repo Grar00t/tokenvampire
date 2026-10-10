@@ -49,7 +49,8 @@ public static class CaseReport
             return;
         }
         var total = sel.Sum(c => c.Amount.Amount);
-        sb.Append(iso(total.ToString("0.00", CultureInfo.InvariantCulture)))
+        // At least two decimal places for compatibility; never round away micro-unit charges.
+        sb.Append(iso(total.ToString("0.00##########################", CultureInfo.InvariantCulture)))
           .Append(" (").Append(iso(sel.Count.ToString(CultureInfo.InvariantCulture)))
           .Append(' ').Append(itemsWord).Append(")\n");
     }

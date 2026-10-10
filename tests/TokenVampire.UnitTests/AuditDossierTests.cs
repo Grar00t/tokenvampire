@@ -83,6 +83,20 @@ public sealed class AuditDossierTests
     }
 
     [Fact]
+    public void Opaque_credential_shaped_strings_cannot_be_rendered_as_redacted_summary()
+    {
+        var root = Mutate();
+        root["findings"]!.AsArray()[0]!.AsObject()["statement"] =
+            "Sensitive opaque value " + new string('A', 43);
+        Assert.False(IsAccepted(root));
+
+        root = Mutate();
+        root["findings"]!.AsArray()[0]!.AsObject()["statement"] =
+            "Authorization: Bearer example";
+        Assert.False(IsAccepted(root));
+    }
+
+    [Fact]
     public void Input_is_bounded_and_enums_cannot_be_numbers()
     {
         Assert.False(AuditDossierCodec.TryRead(new byte[AuditDossierCodec.MaxBytes + 1], out _, out _));

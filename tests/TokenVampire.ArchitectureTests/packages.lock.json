@@ -170,10 +170,18 @@
           "TokenVampire.Domain": "[1.0.0, )"
         }
       },
+      "tokenvampire.billing": {
+        "type": "Project",
+        "dependencies": {
+          "TokenVampire.Application": "[1.0.0, )",
+          "TokenVampire.Domain": "[1.0.0, )"
+        }
+      },
       "tokenvampire.cli": {
         "type": "Project",
         "dependencies": {
           "TokenVampire.Application": "[1.0.0, )",
+          "TokenVampire.Billing": "[1.0.0, )",
           "TokenVampire.Infrastructure": "[1.0.0, )",
           "TokenVampire.Presentation": "[1.0.0, )",
           "TokenVampire.Reporting": "[1.0.0, )"

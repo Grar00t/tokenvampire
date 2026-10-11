@@ -100,6 +100,24 @@ Additional project rules:
 
 ---
 
+## Reasoning-token cost audit
+
+`reasoning-audit` estimates an **output-rate component** from locally supplied
+usage and model-specific price terms without treating an estimate as an invoice.
+It distinguishes inclusive versus additive thinking-token accounting, never
+double-counts reasoning already included in output, and treats missing usage as
+**UNKNOWN** rather than zero.
+
+```sh
+dotnet run --project src/TokenVampire.Cli -- reasoning-audit --input examples/reasoning-billing-scenario.json
+```
+
+The bundled example is **synthetic** and always classified `ScenarioOnly`.
+Actual cost and usefulness require dated provider usage, rates, invoices and
+controlled quality measurements. See [reasoning billing audit](docs/reasoning-billing.md).
+
+---
+
 ## Reality Check Matrix
 
 | What a system or dashboard may say | What an audit requires |

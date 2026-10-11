@@ -21,3 +21,5 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with: { global-json-file: global.json }
       - run: ./scripts/verify.sh
+      - name: Exercise synthetic reasoning audit CLI
+        run: dotnet run --project src/TokenVampire.Cli -c Release --no-build -- reasoning-audit --input examples/reasoning-billing-scenario.json

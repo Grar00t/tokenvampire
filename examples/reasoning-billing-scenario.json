@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "provider": "example",
+  "model": "synthetic-model",
+  "currency": "USD",
+  "accountingMode": "inclusiveOutput",
+  "reportedOutputTokens": { "value": 300, "provenance": "assumed" },
+  "reasoningTokens": { "value": 200, "provenance": "assumed" },
+  "outputRatePerMillion": { "value": 10.00, "provenance": "assumed" }
+}

@@ -11,6 +11,7 @@
     <Project Path="src/TokenVampire.I18n/TokenVampire.I18n.csproj" />
     <Project Path="src/TokenVampire.Infrastructure/TokenVampire.Infrastructure.csproj" />
     <Project Path="src/TokenVampire.Jurisdictions/TokenVampire.Jurisdictions.csproj" />
+    <Project Path="src/TokenVampire.Parsing/TokenVampire.Parsing.csproj" />
     <Project Path="src/TokenVampire.Plugin.Abstractions/TokenVampire.Plugin.Abstractions.csproj" />
     <Project Path="src/TokenVampire.Presentation/TokenVampire.Presentation.csproj" />
     <Project Path="src/TokenVampire.Remedies/TokenVampire.Remedies.csproj" />

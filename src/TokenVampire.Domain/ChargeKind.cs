@@ -5,4 +5,5 @@ public enum ChargeKind { CreditTopUp, Subscription, SeatLicense, UsageConsumptio
 public sealed record Charge(string Id, ChargeKind Kind, Money Amount, DateOnly Date, string EvidenceId)
 {
     public bool IsConsumption => Kind == ChargeKind.UsageConsumption;
+    public ChargeClassification Classification { get; init; } = ChargeClassification.Unknown;
 }
